@@ -7,9 +7,7 @@ import {
   View,
   TextInput,
   Text,
-  ViewStyle,
-  TextStyle,
-  TextInputProps, } from 'react-native';
+ } from 'react-native';
 
 
 import { Formik } from 'formik';
@@ -18,7 +16,11 @@ import { Formik } from 'formik';
 
 const Jobs = (props) => {
 
-  const [job, setJob ] = useState([])
+  const [job, setJob ] = useState([]);
+
+  let jobList = job;
+
+  console.log('jobList------- ', job);
 
   return (
     <>
@@ -29,24 +31,27 @@ const Jobs = (props) => {
       jobTitle: '',
       dateApplied: '',
     }}
-    onSubmit={values => {
+    onSubmit={ (values, {resetForm}) => {
 
       console.log('SUBMITTED VALUES:', values)
     
-      setJob(values);
+      setJob([...job, {values}]);
+
+      resetForm({values: ''})
     }
+
+    
 
 
 
     }>
 
-    {({ handleChange, handleBlur, handleSubmit, values }) => (
+    {({ handleChange, handleSubmit, values }) => (
     <View>
       <Text>Company to Work At</Text>
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
         onChangeText={handleChange('companyName')}
-        onBlur={handleBlur('companyName')}
         value={values.companyName}
         />
       <Text>Job Title</Text>
@@ -67,72 +72,11 @@ const Jobs = (props) => {
   )}
 </Formik>
 
-<Text>{job.companyName}</Text>
+<Text>JOB WILL GO HERE</Text>
 </>
 
 )
 
-
-  // const [ job, setJob ] = useState([
-  //   {
-  //     company: '',
-  //     title:'',
-  //     dateApplied: '',
-  //     submitted: false,
-  //   }
-  // ]);
-
-  // const onCompanyTextChange = (event) => {
-  //   console.log('this is text from TextInput:', event)
-  //   setJob()
-  // }
-
-  // const onTitleTextChange = (event) => {
-  //   // console.log('this is text from TextInput:', text)
-  // }
-
-  // const onDateTextChange = (event) => {
-  //   // console.log('this is text from TextInput:', text)
-  // }
-
-  // const handleTextInputSubmit = (event) => {
-
-  //   event.preventDefault();
-
-  //   let input = event.nativeEvent.text;
-
-  //   setJob(input);
-  
-  // }
-
-
-  // return (
-  //   <>
-  //   <TextInput
-  //     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-  //     placeholder='company'
-  //     onSubmitEditing={handleTextInputSubmit}
-  //   />
-
-  //   <TextInput
-  //     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-  //     placeholder='job title'
-  //     onChangeText={onTitleTextChange}
-  //   />
-
-  //   <TextInput
-  //     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-  //     placeholder='date applied'
-  //     onChangeText={onDateTextChange}
-  //   />
-
-  //   <Text>These are your jobs</Text>
-  //   <Text>ENTERED JOB:</Text>
-
-  //   <Text>{job}</Text>
-
-  //   </>
-  // )
   
 };
 
