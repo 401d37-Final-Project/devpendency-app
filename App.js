@@ -5,9 +5,7 @@ import Sketch from './sketch'
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Can you see this change?</Text>
       <Sketch />
-      <StatusBar style="auto" />
     </View>
   );
 }

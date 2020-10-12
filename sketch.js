@@ -1,71 +1,108 @@
-
-
-// Code borrowed from https://snack.expo.io/@mtkopone/draw-gesture-path
+// Code borrowed from https://snack.expo.io/@mtkopone/draw-gesture-path and adapted for multi-line drawings
 
 import React, { useRef, useState } from 'react';
 import { Dimensions, PanResponder, View, StyleSheet } from 'react-native';
 import Svg, { Polyline } from 'react-native-svg';
 
-const examplePath = [
-  { x: 90, y: 300 },
-  { x: 170, y: 45 },
-  { x: 250, y: 290 },
-  { x: 45, y: 130 },
-  { x: 285, y: 130 },
-  { x: 90, y: 298 }
-];
+const examplePath = [];
 
 const GesturePath = ({ path, color }) => {
   const { width, height } = Dimensions.get('window');
-  const points = path.map(p => `${p.x},${p.y}`).join(' ');
+  let lines;
+  let lineList;
+  if (path.length) {
+    lines = path.map((line) => {
+      const points = line.map((p) => `${p.x},${p.y}`).join(' ');
+      return points;
+    });
+    lineList = lines.map((line) => {
+      return (
+        <Polyline points={line} fill="none" stroke={color} strokeWidth="1" />
+      );
+    });
+  }
+
   return (
     <Svg height="100%" width="100%" viewBox={`0 0 ${width} ${height}`}>
-      <Polyline
-        points={points}
-        fill="none"
-        stroke={color}
-        strokeWidth="1"
-      />
-    </Svg>    
+      {lineList}
+    </Svg>
   );
 };
 
-const GestureRecorder = ({ onPathChanged }) => {
-  const pathRef = useRef([]);
+// const GestureRecorder = ({ onPathChanged, path }) => {
+//   const pathRef = useRef([]);
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderGrant: () => { pathRef.current = [] },
-      onPanResponderMove: (event) => {
-        pathRef.current.push({
-          x: event.nativeEvent.locationX,
-          y: event.nativeEvent.locationY,
-        })
-        // Uncomment the next line to draw the path as the user is performing the touch. (A new array must be created so setState recognises the change and re-renders the App)
-        onPathChanged([...pathRef.current]);
-      },
-      onPanResponderRelease: () => { onPathChanged([...pathRef.current]) }
-    })
-  ).current;
+//   const panResponder = useRef(
+//     PanResponder.create({
+//       onMoveShouldSetPanResponder: () => true,
+//       onPanResponderGrant: () => {
+//         pathRef.current = [];
+//       },
+//       onPanResponderMove: (event) => {
+//         pathRef.current.push({
+//           x: event.nativeEvent.locationX,
+//           y: event.nativeEvent.locationY,
+//         });
+//         // Uncomment the next line to draw the path as the user is performing the touch. (A new array must be created so setState recognises the change and re-renders the App)
+//         let paths = [];
+//         paths = path.concat(paths);
+//         paths.push([...pathRef.current]);
+//         onPathChanged(paths);
+//       },
+//       onPanResponderRelease: () => {
+//         let paths = [];
+//         paths = path.concat(paths);
+//         paths.push([...pathRef.current]);
+//         onPathChanged(paths);
+//       },
+//     })
+//   ).current;
 
-  return (
-    <View
-      style={StyleSheet.absoluteFill}
-      {...panResponder.panHandlers}
-    />
-  );
-}
+//   return <View style={StyleSheet.absoluteFill} {...panResponder.panHandlers} />;
+// };
 
-const App = () => {
+const Sketch = () => {
   const [path, setPath] = useState(examplePath);
+  const GestureRecorder = () => {
+    const pathRef = useRef([]);
+
+    const panResponder = useRef(
+      PanResponder.create({
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderGrant: () => {
+          pathRef.current = [];
+        },
+        onPanResponderMove: (event) => {
+          pathRef.current.push({
+            x: event.nativeEvent.locationX,
+            y: event.nativeEvent.locationY,
+          });
+          // Uncomment the next line to draw the path as the user is performing the touch. (A new array must be created so setState recognises the change and re-renders the )
+          let paths = [];
+          paths = path.concat(paths);
+          paths.push([...pathRef.current]);
+          setPath(paths);
+        },
+        onPanResponderRelease: () => {
+          let paths = [];
+          paths = path.concat(paths);
+          paths.push([...pathRef.current]);
+          setPath(paths);
+        },
+      })
+    ).current;
+
+    return (
+      <View style={StyleSheet.absoluteFill} {...panResponder.panHandlers} />
+    );
+  };
+  
   return (
     <View style={StyleSheet.absoluteFill}>
-        {console.log(path)}
       <GesturePath path={path} color="green" />
-      <GestureRecorder onPathChanged={setPath} />
+      <GestureRecorder />
     </View>
   );
-}
+};
 
-export default App
+export default Sketch;
