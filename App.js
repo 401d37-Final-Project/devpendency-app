@@ -3,7 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import Bookmarks from './components/Bookmarks';
+import Bookmarks from './components/Bookmarks/Bookmarks';
 import Jobs from './components/Jobs';
 import Devnap from './components/Devnap';
 
@@ -35,8 +35,6 @@ export default function App() {
       </>
     );
   };
-
-
 
 
   return (
