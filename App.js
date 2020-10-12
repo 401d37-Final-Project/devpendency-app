@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Bookmarks from './components/Bookmarks';
-import Jobs from './components/Jobs';
+import JobAdd from './components/JobAdd';
 import Devnap from './components/Devnap';
 
 const Stack = createStackNavigator();
@@ -49,7 +49,7 @@ export default function App() {
         />
         <Stack.Screen name="Devnap" component={Devnap} />
         <Stack.Screen name="Bookmarks" component={Bookmarks} />
-        <Stack.Screen name="Jobs" component={Jobs} />
+        <Stack.Screen name="Jobs" component={JobAdd} />
       </Stack.Navigator>
     </NavigationContainer>
   );
