@@ -1,9 +1,11 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { StyleSheet, Button, View, TextInput,Text, FlatList, TouchableOpacity, StatusBar } from 'react-native';
+
+import { Card } from 'react-native-elements';
 
 import { Formik } from 'formik';
 
@@ -20,9 +22,17 @@ const styles = StyleSheet.create({
 
 const Jobs = () => {
 
+  const [job, setJob ] = useState([]);
+
+  const activeJobForDetails = useRef('')
+
   const JobDeets = ({navigation}) => {
 
     console.log('NAVIGATION PROP', navigation)
+
+    console.log('STATE', job)
+
+    console.log('active job useRef', activeJobForDetails)
 
     return (
       <>
@@ -37,38 +47,46 @@ const Jobs = () => {
   };
 
 
-
-  const [job, setJob ] = useState([]);
-
-
-
-
-
   const JobTrackHomeScreen = ({navigation}) => {
 
 
     const renderItem = ({item}) => {
 
       console.log('---', item);
+
+      function handleJobDeetsPress() {
+
+        console.log('!!! ITEM INSIDE', item);
+        navigation.navigate('Job Details');
+        activeJobForDetails.current= item.values.jobID;
+
+      }
   
   
       return (
+        <>
+        <Card>
+
+
   
         <TouchableOpacity
-        style={styles.jobButton}
-        keyExtractor={(item) => item.id}
-        item={item}
-        onPress={() => {
-          console.log('its happening!!!');
-          navigation.navigate('Job Details')
-        }}
-  
-      >
+          style={styles.jobButton}
+          keyExtractor={(item) => item.id}
+          item={item}>
+
         <Text>{item.values.companyName}</Text>
         <Text>{item.values.jobTitle}</Text>
         <Text>{item.values.dateApplied}</Text>
+
+        <Button
+        title='More Details'
+        onPress={handleJobDeetsPress}
+        />
   
-      </TouchableOpacity>
+        </TouchableOpacity>
+        
+        </Card>
+      </>
   
   
       )
@@ -83,7 +101,9 @@ const Jobs = () => {
       initialValues={{
         companyName: '',
         jobTitle: '',
+        jobID: '',
         dateApplied: '',
+        addtlNotes: '',
       }}
   
       onSubmit={ (values, {resetForm}) => {
@@ -93,7 +113,8 @@ const Jobs = () => {
         setJob([...job, {values}]);
         resetForm({values: ''})
       }
-  
+
+
   
       }>
   
@@ -101,24 +122,45 @@ const Jobs = () => {
       <View>
         <Text>Company</Text>
         <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
           onChangeText={handleChange('companyName')}
           value={values.companyName}
           />
+
         <Text>Job Title</Text>
         <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
           onChangeText={handleChange('jobTitle')}
           value={values.jobTitle}
           />
+        
+        <Text>Job ID (required) </Text>
+        <TextInput
+          style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={handleChange('jobID')}
+          value={values.jobID}
+          />
+
         <Text>Date Applied</Text>
         <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
           onChangeText={handleChange('dateApplied')}
           value={values.dateApplied}
           />
+
+        <Text>Additional Notes</Text>
+        <TextInput
+          style={{ height: 60, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={handleChange('addtlNotes')}
+          value={values.addtlNotes}
+          multiline={true}
+          />
   
-        <Button onPress={handleSubmit} title="Add Job to Track" />
+        <Button 
+          onPress={handleSubmit} 
+          title="Add Job" 
+          style={{ height: 60, marginTop: 10, borderColor: 'gray', borderWidth: 1 }}
+          />
       </View>
     )}
   </Formik>
