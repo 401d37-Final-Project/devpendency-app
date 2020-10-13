@@ -7,6 +7,8 @@ import { StyleSheet, Button, View, TextInput,Text, FlatList, TouchableOpacity, S
 
 import { Card } from 'react-native-elements';
 
+// import { Button } from 'react-native-paper';
+
 import { Formik } from 'formik';
 
 const Stack = createStackNavigator();
@@ -34,15 +36,25 @@ const Jobs = () => {
 
     console.log('active job useRef', activeJobForDetails)
 
+    const activeJob = job.filter(job => job.values.jobID === activeJobForDetails.current)
+
+    console.log('ACTIVE JOB', activeJob)
+
     return (
       <>
       <Text>Now we're in Job Deets! Neat!</Text>
+      <Card>
+        <Text>{activeJob[0].values.companyName}</Text>
+        <Text>{activeJob[0].values.jobTitle}</Text>
+        <Text>{activeJob[0].values.jobID}</Text>
+        <Text>{activeJob[0].values.dateApplied}</Text>
+        <Text>{activeJob[0].values.addtlNotes}</Text>
+      </Card>
       <Button
         title="Back to Job List"
         onPress={() => 
         navigation.goBack('JobTrackHomeScreen')} />
         </>
-
     )
   };
 

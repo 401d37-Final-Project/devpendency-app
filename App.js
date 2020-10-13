@@ -2,18 +2,27 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native';
 import Bookmarks from './components/Bookmarks';
 import JobAdd from './components/JobAdd';
 import Devnap from './components/Devnap';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
 
   const HomeScreen = ({ navigation }) => {
     return (
       <>
+
+      <Image 
+        source={require('./assets/logo.png')}
+        style={styles.logo}/>
+
+
+
         <Button
           title="Go to Devnap"
           onPress={() =>
@@ -32,6 +41,9 @@ export default function App() {
             navigation.navigate('Jobs', { name: 'Steve' })
           }
         />
+
+
+
       </>
     );
   };
@@ -41,16 +53,16 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
+      <Tab.Navigator>
+        <Tab.Screen
           name="Home"
           component={HomeScreen}
           options={{ title: 'Welcome' }}
         />
-        <Stack.Screen name="Devnap" component={Devnap} />
-        <Stack.Screen name="Bookmarks" component={Bookmarks} />
-        <Stack.Screen name="Jobs" component={JobAdd} />
-      </Stack.Navigator>
+        <Tab.Screen name="Devnap" component={Devnap} />
+        <Tab.Screen name="Bookmarks" component={Bookmarks} />
+        <Tab.Screen name="Jobs" component={JobAdd} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
@@ -63,4 +75,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  navIcon: {
+    height: 60,
+    width: 60,
+  },
+  logo: {
+    height: 200,
+    width: 200,
+  }
 });
