@@ -7,6 +7,7 @@ import { Card, ListItem, Paragraph, Icon } from 'react-native-elements';
 import { useFormik, Formik, Field, Form } from 'formik';
 import { color } from 'react-native-reanimated';
 
+const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
   input: {
@@ -18,14 +19,33 @@ const styles = StyleSheet.create({
 })
 
 const Bookmarks = (props) => {
+
   const [bookmark, setBookmarks] = useState([]);
   const bookmarkList = bookmark;
 
+
+
+  const renderItem = ({ item }) => {
+
+    const handleClick = () => {
+      Linking.openURL(`${item.values.url}`);
+    }
+
+    return (
+      <>
+        <TouchableOpacity
+          keyExtractor={(item) => item.id}
+          item={item}>
+          <Button title={item.values.name} onPress={handleClick}></Button>
+        </TouchableOpacity>
+        <Text>{item.values.description}</Text>
+      </>
+    )
+  }
   return (
     <>
       <Formik
         initialValues={{
-          key: '',
           name: '',
           url: '',
           description: ''
@@ -40,16 +60,16 @@ const Bookmarks = (props) => {
 
         {({ handleChange, handleSubmit, values }) => (
           <View>
-            <Text>Bookmark Name</Text>
-            <TextInput
-              style={styles.input}
-              value={values.name}
-              onChangeText={handleChange('name')} />
             <Text>Bookmark URL</Text>
             <TextInput
               style={styles.input}
               value={values.url}
               onChangeText={handleChange('url')} />
+            <Text>Bookmark Name</Text>
+            <TextInput
+              style={styles.input}
+              value={values.name}
+              onChangeText={handleChange('name')} />
             <Text>Bookmark Description</Text>
             <TextInput
               style={styles.input}
@@ -57,57 +77,28 @@ const Bookmarks = (props) => {
               onChangeText={handleChange('description')} />
             <Button
               onPress={handleSubmit}
-              title="Submit"
+              title="submit"
               color="gray" />
+
           </View>
         )}
       </Formik>
-      <View>
-        <Text>FlatList Renders Here</Text>
-        <FlatList
-          data={bookmark}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <TouchableOpacity title={item} style={styles.person} />}
-        />
-      </View>
+
+      <FlatList
+        data={bookmarkList}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+      />
 
     </>
   );
+
 };
 
 
 export default Bookmarks;
 
-{/* <View>
-  {bookmarks.map(item => {
-  return <CardListItem item={item} key={item.id} />;
-  })}
-  </View> */}
 
-const bookmarks = [
-  {
-    id: 1,
-    name: 'Google',
-    URL: 'http://google.com',
-    Description: 'Search for an answer to that nagging coding problem you can\'t solve.',
-  },
-  {
-    id: 2,
-    name: 'React Native',
-    URL: 'https://reactnative.div/',
-    Description: 'Learn how to build an attractive app in React Native',
-  },
-  {
-    id: 3,
-    name: 'Technical Interview Prep',
-    URL: 'https://learntocodewith.me/posts/technical-interview/',
-    Description: 'Study up on your technical interview questions',
-  },
-  {
-    id: 4,
-    name: 'CSS Tricks',
-    URL: 'https://css-tricks.com/',
-    Description: 'Keep up on your front-end skills'
-  }
-]
+
+
 
