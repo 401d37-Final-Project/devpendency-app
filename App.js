@@ -1,11 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View } from 'react-native';
 import Sketch from './sketch'
 export default function App() {
   return (
     <View style={styles.container}>
       <Sketch />
+      <StatusBar style="auto" />
     </View>
   );
 }

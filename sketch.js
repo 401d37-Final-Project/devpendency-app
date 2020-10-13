@@ -6,103 +6,66 @@ import Svg, { Polyline } from 'react-native-svg';
 
 const examplePath = [];
 
-const GesturePath = ({ path, color }) => {
-  const { width, height } = Dimensions.get('window');
-  let lines;
-  let lineList;
-  if (path.length) {
-    lines = path.map((line) => {
-      const points = line.map((p) => `${p.x},${p.y}`).join(' ');
-      return points;
-    });
-    lineList = lines.map((line) => {
-      return (
-        <Polyline points={line} fill="none" stroke={color} strokeWidth="1" />
-      );
-    });
-  }
-
-  return (
-    <Svg height="100%" width="100%" viewBox={`0 0 ${width} ${height}`}>
-      {lineList}
-    </Svg>
-  );
-};
-
-// const GestureRecorder = ({ onPathChanged, path }) => {
-//   const pathRef = useRef([]);
-
-//   const panResponder = useRef(
-//     PanResponder.create({
-//       onMoveShouldSetPanResponder: () => true,
-//       onPanResponderGrant: () => {
-//         pathRef.current = [];
-//       },
-//       onPanResponderMove: (event) => {
-//         pathRef.current.push({
-//           x: event.nativeEvent.locationX,
-//           y: event.nativeEvent.locationY,
-//         });
-//         // Uncomment the next line to draw the path as the user is performing the touch. (A new array must be created so setState recognises the change and re-renders the App)
-//         let paths = [];
-//         paths = path.concat(paths);
-//         paths.push([...pathRef.current]);
-//         onPathChanged(paths);
-//       },
-//       onPanResponderRelease: () => {
-//         let paths = [];
-//         paths = path.concat(paths);
-//         paths.push([...pathRef.current]);
-//         onPathChanged(paths);
-//       },
-//     })
-//   ).current;
-
-//   return <View style={StyleSheet.absoluteFill} {...panResponder.panHandlers} />;
-// };
-
-const Sketch = () => {
+export default function Sketch () {
   const [path, setPath] = useState(examplePath);
-  const GestureRecorder = () => {
-    const pathRef = useRef([]);
-
-    const panResponder = useRef(
-      PanResponder.create({
-        onMoveShouldSetPanResponder: () => true,
-        onPanResponderGrant: () => {
-          pathRef.current = [];
-        },
-        onPanResponderMove: (event) => {
-          pathRef.current.push({
-            x: event.nativeEvent.locationX,
-            y: event.nativeEvent.locationY,
-          });
-          // Uncomment the next line to draw the path as the user is performing the touch. (A new array must be created so setState recognises the change and re-renders the )
-          let paths = [];
-          paths = path.concat(paths);
-          paths.push([...pathRef.current]);
-          setPath(paths);
-        },
-        onPanResponderRelease: () => {
-          let paths = [];
-          paths = path.concat(paths);
-          paths.push([...pathRef.current]);
-          setPath(paths);
-        },
-      })
-    ).current;
-
-    return (
-      <View style={StyleSheet.absoluteFill} {...panResponder.panHandlers} />
-    );
-  };
+  const pathRef = useRef([[]]).current;
   
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+        console.log('onPanResponderGrant')
+      },
+      onPanResponderMove: (event) => {
+       const point = {
+          x: event.nativeEvent.locationX,
+          y: event.nativeEvent.locationY,
+        };
+        // Uncomment the next line to draw the path as the user is performing the touch. (A new array must be created so setState recognises the change and re-renders the )
+        pathRef[pathRef.length-1].push(point)
+        
+        setPath([...pathRef]);
+      },
+      onPanResponderRelease: () => {
+        console.log('onPanResponderRelease')
+        pathRef.push([])
+        setPath([...pathRef]);
+      },
+    })
+  ).current;
+
+  const color = "green";
+  const { width, height } = Dimensions.get('window');
+  
+  const uberPoints = path.map(points => {
+    return points.map(p => `${p.x},${p.y}`).join(' ')
+  })
+
   return (
-    <View style={StyleSheet.absoluteFill}>
-      <GesturePath path={path} color="green" />
-      <GestureRecorder />
+    <View style={styles.container} {...panResponder.panHandlers}>
+      <Svg height="100%" width="100%" viewBox={`0 0 ${width} ${height}`}>
+        {uberPoints.map(points => (
+          <Polyline
+          points={points}
+          fill="none"
+          stroke={color}
+          strokeWidth="1"
+          />
+        ))
+        }
+      
+      </Svg>
     </View>
   );
 };
 
-export default Sketch;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+})
+
+
