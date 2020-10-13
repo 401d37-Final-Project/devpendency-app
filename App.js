@@ -98,7 +98,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-      
+      <Text>Meet the Devs</Text>
       <RenderCardList />
       
       </ScrollView>
