@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { 
   StyleSheet, 
@@ -7,6 +7,11 @@ import {
   View,
   TextInput,
   Text,
+  SafeAreaView, 
+  FlatList, 
+  Item,
+  TouchableOpacity,
+  StatusBar
  } from 'react-native';
 
 
@@ -18,9 +23,24 @@ const Jobs = (props) => {
 
   const [job, setJob ] = useState([]);
 
-  let jobList = job;
+  const renderItem = ({item}) => {
 
-  console.log('jobList------- ', job);
+    return (
+
+      <TouchableOpacity
+      keyExtractor={(item) => item.id}
+      item={item}
+      onPress={() => console.log('its happening!!!!')}
+    >
+      <Text>{item.values.companyName}</Text>
+    </TouchableOpacity>
+
+
+    )
+
+  }
+
+
 
   return (
     <>
@@ -31,6 +51,7 @@ const Jobs = (props) => {
       jobTitle: '',
       dateApplied: '',
     }}
+
     onSubmit={ (values, {resetForm}) => {
 
       console.log('SUBMITTED VALUES:', values)
@@ -38,10 +59,9 @@ const Jobs = (props) => {
       setJob([...job, {values}]);
 
       resetForm({values: ''})
+
+      console.log('job', job)
     }
-
-    
-
 
 
     }>
@@ -72,7 +92,13 @@ const Jobs = (props) => {
   )}
 </Formik>
 
-<Text>JOB WILL GO HERE</Text>
+<Text>JOBS ADDED WILL GO BELOW HERE</Text>
+
+<FlatList
+  keyExtractor={(item) => item.id}
+  data={job}
+  renderItem={renderItem} />
+
 </>
 
 )
