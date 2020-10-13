@@ -14,11 +14,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     marginHorizontal: 20,
   },
-  iconButton: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+  // buttonContainer: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'left',
+  //   alignContent: 'center',
+  // }
 });
 
 const peopleObjects = [
@@ -61,27 +61,25 @@ const RenderCard = props => {
     <View>
       <Card>
         <Card.Title title={props.people.name} subtitle={props.people.subtitle} />
-        <Card.Content>
-        </Card.Content>
         <Card.Cover source={{ uri: props.people.uri }} />
           <Paragraph>{props.people.content}</Paragraph>
+          <Card.Actions>
 
-          <Icon.Button style={styles.iconButton}
-            name='github'
-            backgroundColor='#2b3137'
-            onPress={gotoGithub()}
-          >
-          Check my Github
-          </Icon.Button>
+            <Icon.Button
+              name='github'
+              backgroundColor='#2b3137'
+              onPress={gotoGithub()}
+            >
+            </Icon.Button>
 
-          <Icon.Button style={styles.iconButton}
-            name='linkedin'
-            backgroundColor='#0e76a8'
-            // onPress={this.gotoLinkedin}
-          >
-          Connect on Linkedin
-          </Icon.Button>
+            <Icon.Button
+              name='linkedin'
+              backgroundColor='#0e76a8'
+              // onPress={this.gotoLinkedin}
+            >
+            </Icon.Button>
 
+            </Card.Actions>
       </Card>
     </View>
   );
