@@ -6,6 +6,11 @@ import Constants from 'expo-constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
+  basic: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
@@ -16,7 +21,11 @@ const styles = StyleSheet.create({
   cards: {
     flex: 1,
     padding: 20,
+    marginTop: 60,
+    maxWidth: '80%',
+    elevation: 8,
   }
+  
   // buttonContainer: {
   //   flexDirection: 'row',
   //   justifyContent: 'left',
@@ -24,18 +33,18 @@ const styles = StyleSheet.create({
   // }
 });
 
-const theme = {
-  ...DefaultTheme,
-  dark: true,
-  roundness: 5,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#EEF1E6',
-    accent: '#F9665E',
-    background: '#A2A2A2',
-    text: '#2E373E',
-  },
-};
+// const theme = {
+//   ...DefaultTheme,
+//   dark: true,
+//   roundness: 5,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#EEF1E6',
+//     accent: '#F9665E',
+//     background: '#A2A2A2',
+//     text: '#2E373E',
+//   },
+// };
 
 const peopleObjects = [
   {
@@ -88,7 +97,7 @@ const gotoLinkedin = (url) => {
 
 const RenderDevCard = props => {
   return (
-    <View>
+    <View style={styles.basic}>
       <Card style={styles.cards}>
         <Card.Title title={props.people.name} subtitle={props.people.subtitle} />
         <Card.Cover source={{ uri: props.people.uri }} />
@@ -129,16 +138,14 @@ const DevCardList = () => {
 
 export default function DevList() {
   return (
-    <PaperProvider theme={theme}>
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
 
-        <Title>Meet the Devs</Title>
-        <DevCardList />
-        
-        </ScrollView>
-      </SafeAreaView>
-    </PaperProvider>
+      <Title>Meet the Devs</Title>
+      <DevCardList />
+      
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

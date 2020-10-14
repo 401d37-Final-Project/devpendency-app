@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   delete: {
     fontFamily: "Cochin",
     textAlign: 'right',
-  }
+  },
 
 })
 
