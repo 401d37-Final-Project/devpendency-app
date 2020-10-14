@@ -2,16 +2,16 @@ import 'react-native-gesture-handler';
 import React, { useState, useRef } from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { StyleSheet, Button, View, TextInput,Text, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 
 import { Card } from 'react-native-elements';
 
-// import { Button } from 'react-native-paper';
-
 import { Formik } from 'formik';
 
 const Stack = createStackNavigator();
+// const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
   jobButton: {
@@ -28,6 +28,7 @@ const Jobs = () => {
 
   const activeJobForDetails = useRef('')
 
+
   const JobDeets = ({navigation}) => {
 
     console.log('NAVIGATION PROP', navigation)
@@ -42,7 +43,6 @@ const Jobs = () => {
 
     return (
       <>
-      <Text>Now we're in Job Deets! Neat!</Text>
       <Card>
         <Text>{activeJob[0].values.companyName}</Text>
         <Text>{activeJob[0].values.jobTitle}</Text>
@@ -50,10 +50,6 @@ const Jobs = () => {
         <Text>{activeJob[0].values.dateApplied}</Text>
         <Text>{activeJob[0].values.addtlNotes}</Text>
       </Card>
-      <Button
-        title="Back to Job List"
-        onPress={() => 
-        navigation.goBack('JobTrackHomeScreen')} />
         </>
     )
   };
@@ -64,14 +60,9 @@ const Jobs = () => {
 
     const renderItem = ({item}) => {
 
-      console.log('---', item);
-
       function handleJobDeetsPress() {
-
-        console.log('!!! ITEM INSIDE', item);
-        navigation.navigate('Job Details');
+        navigation.navigate('Back to Job List');
         activeJobForDetails.current= item.values.jobID;
-
       }
   
   
@@ -79,27 +70,24 @@ const Jobs = () => {
         <>
         <Card>
 
+          <TouchableOpacity
+            style={styles.jobButton}
+            keyExtractor={(item) => item.id}
+            item={item}>
 
-  
-        <TouchableOpacity
-          style={styles.jobButton}
-          keyExtractor={(item) => item.id}
-          item={item}>
+            <Text>{item.values.companyName}</Text>
+            <Text>{item.values.jobTitle}</Text>
+            <Text>{item.values.dateApplied}</Text>
 
-        <Text>{item.values.companyName}</Text>
-        <Text>{item.values.jobTitle}</Text>
-        <Text>{item.values.dateApplied}</Text>
-
-        <Button
-        title='More Details'
-        onPress={handleJobDeetsPress}
-        />
-  
-        </TouchableOpacity>
+            <Button
+            title='More Details'
+            onPress={handleJobDeetsPress}
+            />
+    
+          </TouchableOpacity>
         
         </Card>
       </>
-  
   
       )
   
@@ -110,25 +98,20 @@ const Jobs = () => {
       <>
   
       <Formik
-      initialValues={{
-        companyName: '',
-        jobTitle: '',
-        jobID: '',
-        dateApplied: '',
-        addtlNotes: '',
-      }}
-  
-      onSubmit={ (values, {resetForm}) => {
-  
-        console.log('SUBMITTED VALUES:', values)
-      
-        setJob([...job, {values}]);
-        resetForm({values: ''})
-      }
+        initialValues={{
+          companyName: '',
+          jobTitle: '',
+          jobID: '',
+          dateApplied: '',
+          addtlNotes: '',
+        }}
+    
+        onSubmit={ (values, {resetForm}) => {
 
-
-  
-      }>
+          setJob([...job, {values}]);
+          resetForm({values: ''})
+          
+        }}>
   
       {({ handleChange, handleSubmit, values }) => (
       <View>
@@ -178,7 +161,7 @@ const Jobs = () => {
   </Formik>
   
   <FlatList
-    keyExtractor={(item) => item.id}
+    keyExtractor={(value, index) => index.toString()}
     data={job}
     renderItem={renderItem}
      />
@@ -194,12 +177,14 @@ const Jobs = () => {
 return (
 
   <Stack.Navigator>
+
     <Stack.Screen
       name='Job Track Home'
       component={JobTrackHomeScreen} />
     <Stack.Screen 
-      name="Job Details" 
+      name="Back to Job List" 
       component={JobDeets} />
+
   </Stack.Navigator>
 
 )

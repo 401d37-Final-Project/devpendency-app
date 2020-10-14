@@ -133,7 +133,7 @@ const Bookmarks = (props) => {
         <FlatList
           style={{ marginTop: 40 }}
           data={bookmarkList.sort((a, b) => a.name - b.name)}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(value, index) => index.toString()}
           renderItem={renderItem}
         />
 
