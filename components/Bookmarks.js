@@ -1,11 +1,11 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-// import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, SafeAreaView, ScrollView, StatusBar, FlatList, Text, Container, TextInput, View, Linking, TouchableOpacity } from 'react-native';
 import { Card, ListItem, Paragraph, Icon } from 'react-native-elements';
 import { useFormik, Formik, Field, Form } from 'formik';
-import { DefaultTheme, Button, Provider as PaperProvider } from 'react-native-paper';
+import { DefaultTheme, Button, Provider as PaperProvider, IconButton, Colors } from 'react-native-paper';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Stack = createStackNavigator();
 
@@ -61,13 +61,20 @@ const Bookmarks = (props) => {
     setBookmarks(newList)
   }
 
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem(item.values.url, jsonValue)
+    } catch (e) {
+      console.log('Unable to store data')
+    }
+  }
+
   const renderItem = ({ item }) => {
 
     const handleClick = () => {
       Linking.openURL(`${item.values.url}`);
     }
-
-    const bookmarkSort
 
 
     return (
@@ -86,10 +93,10 @@ const Bookmarks = (props) => {
               {item.values.description}
             </Text>
             <TouchableOpacity>
-              <Button
-                mode="outlined" onPress={() => deleteItem(item.values.url)}>
-                Delete
-              </Button>
+              <IconButton
+                icon="delete"
+                size={20}
+                onPress={() => deleteItem(item.values.url)} />
             </TouchableOpacity>
           </Card>
         </>
@@ -162,11 +169,6 @@ const Bookmarks = (props) => {
 export default Bookmarks;
 
 
-// alphabetize results
-// add a delete button
-// style the page
-// nav on the bottom of the screen at all times
-// 
 
 
 
