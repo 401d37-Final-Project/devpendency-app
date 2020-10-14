@@ -1,4 +1,3 @@
-
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -54,6 +53,7 @@ export default function App() {
 
 
   return (
+
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
@@ -85,4 +85,3 @@ const styles = StyleSheet.create({
     width: 250,
   }
 });
-
