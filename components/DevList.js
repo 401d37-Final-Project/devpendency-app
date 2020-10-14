@@ -6,6 +6,11 @@ import Constants from 'expo-constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
+  basic: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
@@ -18,7 +23,9 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 60,
     maxWidth: '80%',
+    elevation: 8,
   }
+  
   // buttonContainer: {
   //   flexDirection: 'row',
   //   justifyContent: 'left',
@@ -90,7 +97,7 @@ const gotoLinkedin = (url) => {
 
 const RenderDevCard = props => {
   return (
-    <View>
+    <View style={styles.basic}>
       <Card style={styles.cards}>
         <Card.Title title={props.people.name} subtitle={props.people.subtitle} />
         <Card.Cover source={{ uri: props.people.uri }} />
