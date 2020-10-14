@@ -140,6 +140,7 @@ const Bookmarks = (props) => {
       )
     }
     return (
+
       <>
         <View style={styles.basic}>
           <Card style={styles.cards}>
@@ -211,6 +212,7 @@ const Bookmarks = (props) => {
         <Stack.Screen
           name='Bookmarks'
           component={Bookmark} />
+
 
       </Stack.Navigator>
     </>
