@@ -113,20 +113,19 @@ const Bookmarks = (props) => {
           {({ handleChange, handleSubmit, values }) => (
 
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={styles.heading} >Add a new Bookmark</Text>
-              {/* <Text style={styles.baseText}>Bookmark URL</Text> */}
+   
               <TextInput
                 style={styles.input}
                 placeholder={'Bookmark URL'}
                 value={values.url}
                 onChangeText={handleChange('url')} />
-              {/* <Text style={styles.baseText}>Bookmark Name</Text> */}
+      
               <TextInput
                 style={styles.input}
                 placeholder={'Bookmark Name'}
                 value={values.name}
                 onChangeText={handleChange('name')} />
-              {/* <Text style={styles.baseText}>Bookmark Description</Text> */}
+          
               <TextInput
                 style={styles.input}
                 placeholder={'Bookmark Description'}
@@ -161,7 +160,7 @@ const Bookmarks = (props) => {
     <Stack.Navigator>
 
       <Stack.Screen 
-        name='Bookmarks'
+        name='Add a New Bookmark'
         component={Bookmark} />
 
     </Stack.Navigator>

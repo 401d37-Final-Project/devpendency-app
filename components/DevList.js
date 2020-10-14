@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity, Linking, Alert } from 'react-native';
+import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity, Linking, Alert, WebView } from 'react-native';
 import { Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Constants from 'expo-constants';
 
@@ -52,7 +52,7 @@ const peopleObjects = [
     content: 'Card content 1',
     uri: 'https://picsum.photos/700',
     githubURL: 'https://github.com/blakerom',
-    linkedinURL: 'https://www.linkedin.com/in/blakeromero/'
+    linkedinURL: 'https://www.linkedin.com/in/blakeromero'
   },
   {
     id: 2,
@@ -60,7 +60,7 @@ const peopleObjects = [
     subtitle: 'Software Developer',
     content: 'Card content 2',
     uri: 'https://picsum.photos/700',
-    githubURL: 'url for github 2',
+    githubURL: 'https://www.linkedin.com/in/tia-low',
     linkedinURL: 'url for linkedin 2'
   }, 
   {
@@ -69,7 +69,7 @@ const peopleObjects = [
     subtitle: 'Software Developer',
     content: 'Card content 3',
     uri: 'https://picsum.photos/700',
-    githubURL: 'url for github 3',
+    githubURL: 'https://github.com/herrigesmt',
     linkedinURL: 'url for linkedin 3'
   }, 
   {
@@ -78,39 +78,21 @@ const peopleObjects = [
     subtitle: 'Software Developer',
     content: 'Card content 4',
     uri: 'https://picsum.photos/700',
-    githubURL: 'url for github 4',
+    githubURL: 'https://github.com/SBALDOCK',
     linkedinURL: 'url for linkedin 4'
   }
 ];
 
 const gotoGithub = (url) => {
-  const handlePress = useCallback(async () => {
-    const support = await Linking.canOpenURL(url);
-
-    if(supported) {
-      await Linking.openURL(url);
-    } else {
-      Alert.alert(`Could not find ${url}. Make sure you include an \'http://\' or \'https://\'`);
-    }
-  }, [url]);
-
-  console.log(`clicked on Github ${url}`);
-  return <Button title={children} onPress={handlePress} />;
+  Linking.openURL(url).catch(err =>
+    Alert.alert(`Could not find ${url}. Make sure you include an \'http://\' or \'https://\'`)
+  );
 };
 
 const gotoLinkedin = (url) => {
-  const handlePress = useCallback(async () => {
-    const support = await Linking.canOpenURL(url);
-
-    if(supported) {
-      await Linking.openURL(url);
-    } else {
-      Alert.alert(`Could not find ${url}. Make sure you include an \'http://\' or \'https://\'`);
-    }
-  }, [url]);
-  
-  console.log(`clicked on linkedin ${url}`);
-  return <Button title={children} onPress={handlePress} />;
+  Linking.openURL(url).catch(err =>
+    Alert.alert(`Could not find ${url}. Make sure you include an \'http://\' or \'https://\'`)
+  );
 };
 
 const RenderDevCard = props => {

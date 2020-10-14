@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { Animated, Dimensions, View, StyleSheet, PanResponder, Text, Button, TouchableOpacity } from 'react-native';
+import { Animated, Dimensions, View, StyleSheet, PanResponder, Button, TouchableOpacity } from 'react-native';
+import { Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Svg, { Polyline } from 'react-native-svg';
 import {Picker} from '@react-native-community/picker';
 import AsyncStorage from '@react-native-community/async-storage'
@@ -28,26 +29,19 @@ const examplePath = [
 
 
 const setObjValue = async (drawing) => {
-  const storedKey = new Date();
-  const dataStructure = {
-      [storedKey]: drawing,
-  };
-  let merged
+  const storedKey = new Date();  
+  let existingDrawings
   try {
-    merged = await AsyncStorage.mergeItem('Napkins', JSON.stringify(dataStructure));
-  } catch (e) {
+    existingDrawings = await AsyncStorage.getItem('Napkins')
+  } catch(e) {
     console.log(e)
   }
-
-  if(!merged){
-    try {
-      merged = await AsyncStorage.setItem('Napkins', JSON.stringify(dataStructure));
-    } catch(e) {
-      console.log(e)
-    }
+  existingDrawings = JSON.parse(existingDrawings)
+  try {
+    await AsyncStorage.setItem('Napkins', JSON.stringify({...existingDrawings, [storedKey]: drawing }))
+  } catch(e) {
+    console.log(e)
   }
-
-
 };
 
 const getObj = async () => {
@@ -140,7 +134,7 @@ export default function Sketch() {
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Picker
           selectedValue={color}
-          style={{ height: 50, width: 100 }}
+          style={styles.dropdown}
           onValueChange={(itemValue) => setColor(itemValue)}>
           <Picker.Item label="Black" value="black" />
           <Picker.Item label="Red" value="red" />
@@ -150,7 +144,7 @@ export default function Sketch() {
         </Picker>
         <Picker
           selectedValue={strokeWidth}
-          style={{ height: 50, width: 110 }}
+          style={styles.dropdown}
           onValueChange={(itemValue) => setStrokeWidth(itemValue)}>
           <Picker.Item label="Size: 1" value="1" />
           <Picker.Item label="Size: 2" value="2" />
@@ -243,5 +237,10 @@ const styles = StyleSheet.create({
     flex: 15,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  dropdown: {
+    height: 50, 
+    width: 110,
+    color: 'white',
   }
 });

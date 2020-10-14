@@ -60,13 +60,13 @@ export default function App() {
                   ? 'md-home'
                   : 'ios-home';
               } else if (route.name === 'Napkin') {
-                iconName = focused ? 'ios-list-box' : 'ios-list';
+                iconName = focused ? 'ios-brush' : 'md-brush';
               } else if (route.name === 'Bookmarks') {
-                iconName = focused ? 'ios-list-box' : 'md-book';
+                iconName = focused ? 'md-bookmark' : 'md-book';
               } else if (route.name === 'Jobs') {
-                iconName = focused ? 'ios-list-box' : 'md-document';
+                iconName = focused ? 'ios-document' : 'md-document';
               } else if (route.name === 'About') {
-                iconName = focused ? 'ios-list-box' : 'ios-person';
+                iconName = focused ? 'md-people' : 'md-people';
               }
 
               // You can return any component that you like here!
