@@ -3,6 +3,10 @@ import { Animated, Dimensions, View, StyleSheet, PanResponder, Text, Button, Tou
 import Svg, { Polyline } from 'react-native-svg';
 import {Picker} from '@react-native-community/picker';
 
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
+
+
 const examplePath = [
   [
     { x: 90, y: 300 },
@@ -24,62 +28,68 @@ const examplePath = [
 
 
 export default function Sketch() {
-  let pathRef = useRef([[]]).current;
-  const [path, setPath] = useState(examplePath);
-  const [color, setColor] = useState('black')
-  const [strokeWidth, setStrokeWidth] = useState(5)
-
-  const updatePath = points => {
-    setPath(points);
-  }
-  console.log(pathRef)
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onPanResponderGrant: () => {
-        console.log('onPanResponderGrant');
-      },
-      onPanResponderStart: () => {
-        console.log('onPanResponderStart');
-      },
-      onPanResponderMove: (event, gestureState) => { 
-        // console.log('gestureState', gestureState)
-        const point = {
-          x: gestureState.moveX,
-          y: gestureState.moveY
-          // x: event.nativeEvent.locationX,
-          // y: event.nativeEvent.locationY,
-        };
 
 
-        pathRef[pathRef.length-1].push(point);
+  const Sketch = () => {
 
-        updatePath([...pathRef]);
-      },
-      onPanResponderRelease: () => {
-        console.log('onPanResponderRelease')
-        pathRef.push([]);
-        updatePath([...pathRef]);
-        console.log('pathref', pathRef)
-      }
-    })
-  ).current;
-
-
-  let { width, height } = Dimensions.get('window');
-  width *= .8
-  height *= .8
+    let pathRef = useRef([[]]).current;
+    const [path, setPath] = useState(examplePath);
+    const [color, setColor] = useState('black')
+    const [strokeWidth, setStrokeWidth] = useState(5)
   
-  const uberPoints = path.map(points => {
-    return points.map(p => `${p.x},${p.y}`).join(' ');
-  });
+    const updatePath = points => {
+      setPath(points);
+    }
+    console.log(pathRef)
+  
+    const panResponder = useRef(
+      PanResponder.create({
+        onStartShouldSetPanResponder: (evt, gestureState) => true,
+        onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onMoveShouldSetPanResponder: (evt, gestureState) => true,
+        onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onPanResponderGrant: () => {
+          console.log('onPanResponderGrant');
+        },
+        onPanResponderStart: () => {
+          console.log('onPanResponderStart');
+        },
+        onPanResponderMove: (event, gestureState) => { 
+          // console.log('gestureState', gestureState)
+          const point = {
+            x: gestureState.moveX,
+            y: gestureState.moveY
+            // x: event.nativeEvent.locationX,
+            // y: event.nativeEvent.locationY,
+          };
+  
+  
+          pathRef[pathRef.length-1].push(point);
+  
+          updatePath([...pathRef]);
+        },
+        onPanResponderRelease: () => {
+          console.log('onPanResponderRelease')
+          pathRef.push([]);
+          updatePath([...pathRef]);
+          console.log('pathref', pathRef)
+        }
+      })
+    ).current;
+  
+  
+    let { width, height } = Dimensions.get('window');
+    width *= .8
+    height *= .8
+    
+    const uberPoints = path.map(points => {
+      return points.map(p => `${p.x},${p.y}`).join(' ');
+    });
 
-  return (
-    <>
+    return (
+
+      <>
+
       <View style={{flex:1, flexDirection: 'row'}}>
       <Picker
         selectedValue={color}
@@ -87,7 +97,7 @@ export default function Sketch() {
         onValueChange={(itemValue) => 
           setColor(itemValue)
         }
-      >
+        >
         <Picker.Item label="Black" value="black" />
         <Picker.Item label="Red" value="red" />
         <Picker.Item label="Green" value="red" />
@@ -100,7 +110,7 @@ export default function Sketch() {
         onValueChange={(itemValue) => 
           setStrokeWidth(itemValue)
         }
-      >
+        >
         <Picker.Item label='Size: 1' value='1' />
         <Picker.Item label='Size: 2' value='2' />
         <Picker.Item label='Size: 3' value='3' />
@@ -113,12 +123,12 @@ export default function Sketch() {
         <Picker.Item label='Size: 10' value='10' />
       </Picker>
       <TouchableOpacity style={{ height:50, width: 110 }} onPress={() => {
-          console.log('pathRef before clear', pathRef)
-          console.log('path before clear', path)
-          updatePath(examplePath)
-          pathRef = [[]]
-          console.log('path after clear', path)
-          console.log('pathRef after clear', pathRef)
+        console.log('pathRef before clear', pathRef)
+        console.log('path before clear', path)
+        updatePath(examplePath)
+        pathRef = [[]]
+        console.log('path after clear', path)
+        console.log('pathRef after clear', pathRef)
       }}>
         <Text>Clear</Text>
       </TouchableOpacity>
@@ -130,17 +140,36 @@ export default function Sketch() {
       <Svg height="100%" width="100%" viewBox={`0 0 ${width} ${height}`}>
 
           {uberPoints.map(points => (
-              <Polyline
-                points={points}
-                fill="none"
-                stroke={color}
-                strokeWidth={strokeWidth}
-              />
+            <Polyline
+            points={points}
+            fill="none"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            />
             )) 
           }
           
       </Svg>   
     </View>
+
+    </>
+
+    )
+
+
+  }
+
+
+
+  return (
+    <>
+    <Stack.Navigator>
+
+      <Stack.Screen 
+        name='Dev Napkin Sketch'
+        component={Sketch} />
+
+    </Stack.Navigator>
     </>
   );
 }

@@ -12,25 +12,23 @@ const Stack = createStackNavigator();
 const styles = StyleSheet.create({
   input: {
     margin: 15,
+    paddingLeft: 10,
     borderColor: 'black',
     borderWidth: 1,
-    width: 275
+    width: 275,
   },
-  baseText: {
-    fontFamily: "Cochin",
-  },
+  // baseText: {
+  //   fontFamily: "Cochin",
+  // },
   heading: {
-    fontFamily: "Cochin",
     textAlign: 'center',
-    marginBottom: 30
+    marginBottom: 15,
   },
   description: {
-    fontFamily: "Cochin",
-    marginTop: 20,
+    marginTop: 15,
     textAlign: 'center',
   },
   delete: {
-    fontFamily: "Cochin",
     textAlign: 'right',
   },
   basic: {
@@ -41,34 +39,32 @@ const styles = StyleSheet.create({
   cards: {
     flex: 1,
     padding: 20,
-    marginTop: 50,
+    marginTop: 10,
     maxWidth: '90%',
     elevation: 8,
-    backgroundColor: '#A2A2A2',
   }
+});
 
-})
-
-const theme = {
-  ...DefaultTheme,
-  dark: true,
-  roundness: 5,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#F9665E',
-    accent: '#EEF1E6',
-    background: '#2E373E',
-    text: '#fff',
-    surface: '#A2A2A2'
-  },
-};
+// const theme = {
+//   ...DefaultTheme,
+//   dark: true,
+//   roundness: 5,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#F9665E',
+//     accent: '#EEF1E6',
+//     background: '#2E373E',
+//     text: '#fff',
+//     surface: '#A2A2A2'
+//   },
+// };
 
 const Bookmarks = (props) => {
 
-  const [bookmark, setBookmarks] = useState([]);
-  const bookmarkList = bookmark;
+  const Bookmark = () => {
 
-
+    const [bookmark, setBookmarks] = useState([]);
+    const bookmarkList = bookmark;
 
   const renderItem = ({ item }) => {
 
@@ -76,9 +72,8 @@ const Bookmarks = (props) => {
       Linking.openURL(`${item.values.url}`);
     }
     return (
-      <PaperProvider theme={theme}>
-        <View style={styles.basic}>
-      <Card style={styles.cards}>
+      <View style={styles.basic}>
+        <Card style={styles.cards}>
           <TouchableOpacity
             keyExtractor={(item) => item.id}
             item={item}>
@@ -92,14 +87,13 @@ const Bookmarks = (props) => {
           </Text>
           <Text style={styles.delete}>
             Delete
-        </Text>
+          </Text>
         </Card>
-        </View>
-      </PaperProvider>
+      </View>
     )
   }
   return (
-    <PaperProvider theme={theme}>
+    <>
       <View style={styles.basic}>
       <Card style={styles.cards}>
         <Formik
@@ -118,27 +112,30 @@ const Bookmarks = (props) => {
 
           {({ handleChange, handleSubmit, values }) => (
 
-            <View>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <Text style={styles.heading} >Add a new Bookmark</Text>
-              <Text style={styles.baseText}>Bookmark URL</Text>
+              {/* <Text style={styles.baseText}>Bookmark URL</Text> */}
               <TextInput
                 style={styles.input}
+                placeholder={'Bookmark URL'}
                 value={values.url}
                 onChangeText={handleChange('url')} />
-              <Text style={styles.baseText}>Bookmark Name</Text>
+              {/* <Text style={styles.baseText}>Bookmark Name</Text> */}
               <TextInput
                 style={styles.input}
+                placeholder={'Bookmark Name'}
                 value={values.name}
                 onChangeText={handleChange('name')} />
-              <Text style={styles.baseText}>Bookmark Description</Text>
+              {/* <Text style={styles.baseText}>Bookmark Description</Text> */}
               <TextInput
                 style={styles.input}
+                placeholder={'Bookmark Description'}
                 value={values.description}
                 onChangeText={handleChange('description')} />
               <Button
                 mode="outlined"
                 onPress={handleSubmit}
-                color="gray">
+                >
                 Submit
             </Button>
             </View>
@@ -149,13 +146,26 @@ const Bookmarks = (props) => {
       </View>
 
       <FlatList
-        style={{ marginTop: 40 }}
+        style={{ marginVertical: 10 }}
         data={bookmarkList.sort((a, b) => a.name - b.name)}
         keyExtractor={(value, index) => index.toString()}
         renderItem={renderItem}
       />
 
-    </PaperProvider>
+    </>
+  );
+  }
+
+  return (
+    <>
+    <Stack.Navigator>
+
+      <Stack.Screen 
+        name='Bookmarks'
+        component={Bookmark} />
+
+    </Stack.Navigator>
+    </>
   );
 
 };
