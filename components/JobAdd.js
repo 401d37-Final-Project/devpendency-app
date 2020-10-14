@@ -4,14 +4,14 @@ import React, { useState, useRef } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { StyleSheet, Button, View, TextInput, Text, FlatList, TouchableOpacity, StatusBar } from 'react-native';
+import { StyleSheet, Button, View, TextInput, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 import { Title, Paragraph, Text, Card, IconButton, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+
 
 
 import { Formik } from 'formik';
 
 const Stack = createStackNavigator();
-// const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
   input: {
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     marginTop: 20,
+
     maxWidth: '80%',
     elevation: 8,
   }
@@ -61,7 +62,7 @@ const Jobs = () => {
 
     return (
       <View style={styles.basic}>
-      <Card style={styles.card}>
+      <Card style={styles.cards}>
         <Text>{activeJob[0].values.companyName}</Text>
         <Text>{activeJob[0].values.jobTitle}</Text>
         <Text>{activeJob[0].values.jobID}</Text>
@@ -69,7 +70,7 @@ const Jobs = () => {
         <Text>{activeJob[0].values.addtlNotes}</Text>
         <IconButton
           title='Edit Notes'
-          icon='delete'
+          icon='file-document-edit-outline'
           onPress={() => console.log('pressed!')} />
 
       </Card>
@@ -101,7 +102,7 @@ const Jobs = () => {
   
       return (
         <View style={styles.basic}>
-        <Card style={styles.card}>
+        <Card style={styles.cards}>
 
           <TouchableOpacity
             style={styles.jobButton}
@@ -112,15 +113,15 @@ const Jobs = () => {
             <Text>{item.values.jobTitle}</Text>
             <Text>{item.values.dateApplied}</Text>
 
-            <Button
+            <IconButton
               title='More Details'
+              icon='dots-vertical'
               onPress={handleJobDeetsPress}
             />
 
             <IconButton 
               title='Delete'
               icon='delete'
-              mode='outlined'
               onPress={() => deleteItem(item.values.jobID)}/>
     
           </TouchableOpacity>
@@ -136,7 +137,7 @@ const Jobs = () => {
     return (
       <>
       <View style={styles.basic}>
-      <Card style={styles.card}>
+      <Card style={styles.cards}>
       <Formik
         initialValues={{
           companyName: '',
@@ -155,7 +156,7 @@ const Jobs = () => {
   
       {({ handleChange, handleSubmit, values }) => (
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={styles.heading} >Add a Job Application</Text>
+          {/* <Text style={styles.heading} >Add a Job Application</Text> */}
           {/* <Text>Company</Text> */}
           <TextInput
             style={styles.input}
@@ -164,7 +165,7 @@ const Jobs = () => {
             value={values.companyName}
             />
 
-          {/* <Text>Job Title</Text> */}
+
           <TextInput
             style={styles.input}
             placeholder={'Job Title'}
@@ -172,7 +173,6 @@ const Jobs = () => {
             value={values.jobTitle}
             />
           
-          {/* <Text>Job ID (required) </Text> */}
           <TextInput
             style={styles.input}
             placeholder={'Job ID (required)'}
@@ -180,7 +180,6 @@ const Jobs = () => {
             value={values.jobID}
             />
 
-          {/* <Text>Date Applied</Text> */}
           <TextInput
             style={styles.input}
             placeholder={'Date Applied'}
@@ -188,7 +187,6 @@ const Jobs = () => {
             value={values.dateApplied}
             />
 
-          {/* <Text>Additional Notes</Text> */}
           <TextInput
             style={styles.input}
             placeholder={'Any Additional Notes'}
@@ -229,7 +227,7 @@ return (
   <Stack.Navigator>
 
     <Stack.Screen
-      name='Job Track Home'
+      name='Track Job Applications'
       component={JobTrackHomeScreen} />
     <Stack.Screen 
       name="Back to Job List" 
