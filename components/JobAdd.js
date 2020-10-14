@@ -194,13 +194,13 @@ const Jobs = () => {
 return (
 
   <Stack.Navigator>
-  <Stack.Screen
-    name='Job Track Home'
-    component={JobTrackHomeScreen} />
-  <Stack.Screen 
-    name="Job Details" 
-    component={JobDeets} />
-</Stack.Navigator>
+    <Stack.Screen
+      name='Job Track Home'
+      component={JobTrackHomeScreen} />
+    <Stack.Screen 
+      name="Job Details" 
+      component={JobDeets} />
+  </Stack.Navigator>
 
 )
   

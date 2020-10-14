@@ -5,9 +5,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native';
-import Bookmarks from './components/Bookmarks';
-import JobAdd from './components/JobAdd';
-import Devnap from './components/Devnap';
+import Bookmarks from './components/Bookmarks.js';
+import JobAdd from './components/JobAdd.js';
+import Devnap from './components/Devnap.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +23,7 @@ export default function App() {
 
 
 
-        <Button
+        {/* <Button
           title="Go to Devnap"
           onPress={() =>
             navigation.navigate('Devnap', { name: 'Steve' })
@@ -40,7 +40,7 @@ export default function App() {
           onPress={() =>
             navigation.navigate('Jobs', { name: 'Steve' })
           }
-        />
+        /> */}
 
 
 
@@ -57,11 +57,10 @@ export default function App() {
         <Tab.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: 'Welcome' }}
         />
         <Tab.Screen name="Devnap" component={Devnap} />
         <Tab.Screen name="Bookmarks" component={Bookmarks} />
-        <Tab.Screen name="Jobs" component={JobAdd} />
+        <Tab.Screen name="Job App Track" component={JobAdd} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -75,12 +74,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  navIcon: {
-    height: 60,
-    width: 60,
-  },
   logo: {
-    height: 200,
-    width: 200,
+    height: 250,
+    width: 250,
   }
 });
