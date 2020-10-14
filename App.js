@@ -95,7 +95,7 @@ export default function App() {
                 screenOptions={({ route }) => ({
                   tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
-        
+                    // Icon selection for tab based navigator
                     if (route.name === 'Home') {
                       iconName = focused
                         ? 'md-home'
