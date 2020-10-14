@@ -1,3 +1,4 @@
+
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -79,3 +80,4 @@ const styles = StyleSheet.create({
     width: 250,
   }
 });
+
