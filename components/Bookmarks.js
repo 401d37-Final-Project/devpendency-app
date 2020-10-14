@@ -50,14 +50,26 @@ const Bookmarks = (props) => {
 
   const [bookmark, setBookmarks] = useState([]);
   const bookmarkList = bookmark;
+  console.log('Bookmark List', bookmarkList)
 
+  const deleteItem = async (url) => {
 
+    const newList = await bookmarkList.filter(item => {
+      if (item.values.url !== url)
+        return item;
+    })
+    setBookmarks(newList)
+  }
 
   const renderItem = ({ item }) => {
 
     const handleClick = () => {
       Linking.openURL(`${item.values.url}`);
     }
+
+    const bookmarkSort
+
+
     return (
       <PaperProvider theme={theme}>
         <>
@@ -73,9 +85,12 @@ const Bookmarks = (props) => {
             <Text style={styles.description}>
               {item.values.description}
             </Text>
-            <Text style={styles.delete}>
-              Delete
-          </Text>
+            <TouchableOpacity>
+              <Button
+                mode="outlined" onPress={() => deleteItem(item.values.url)}>
+                Delete
+              </Button>
+            </TouchableOpacity>
           </Card>
         </>
       </PaperProvider>
@@ -132,7 +147,7 @@ const Bookmarks = (props) => {
 
         <FlatList
           style={{ marginTop: 40 }}
-          data={bookmarkList.sort((a, b) => a.name - b.name)}
+          data={bookmarkList.sort((a, b) => a.values.name - b.values.name ? -1 : 1)}
           keyExtractor={(value, index) => index.toString()}
           renderItem={renderItem}
         />
