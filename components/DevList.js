@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity, Linking, Alert } from 'react-native';
 import { Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Constants from 'expo-constants';
 
@@ -51,8 +51,8 @@ const peopleObjects = [
     subtitle: 'Software Developer',
     content: 'Card content 1',
     uri: 'https://picsum.photos/700',
-    githubURL: 'url for github 1',
-    linkedinURL: 'url for linkedin 1'
+    githubURL: 'https://github.com/blakerom',
+    linkedinURL: 'https://www.linkedin.com/in/blakeromero/'
   },
   {
     id: 2,
@@ -84,14 +84,34 @@ const peopleObjects = [
 ];
 
 const gotoGithub = (url) => {
+  const handlePress = useCallback(async () => {
+    const support = await Linking.canOpenURL(url);
+
+    if(supported) {
+      await Linking.openURL(url);
+    } else {
+      Alert.alert(`Could not find ${url}. Make sure you include an \'http://\' or \'https://\'`);
+    }
+  }, [url]);
+
   console.log(`clicked on Github ${url}`);
-  return;
-}
+  return <Button title={children} onPress={handlePress} />;
+};
 
 const gotoLinkedin = (url) => {
+  const handlePress = useCallback(async () => {
+    const support = await Linking.canOpenURL(url);
+
+    if(supported) {
+      await Linking.openURL(url);
+    } else {
+      Alert.alert(`Could not find ${url}. Make sure you include an \'http://\' or \'https://\'`);
+    }
+  }, [url]);
+  
   console.log(`clicked on linkedin ${url}`);
-  return;
-}
+  return <Button title={children} onPress={handlePress} />;
+};
 
 const RenderDevCard = props => {
   return (

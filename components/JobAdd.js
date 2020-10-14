@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { StyleSheet, View, TextInput, FlatList, TouchableOpacity, StatusBar } from 'react-native';
-import { Title, Button, Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Title, Button, IconButton, Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import { Formik } from 'formik';
 
@@ -61,12 +61,17 @@ const Jobs = () => {
 
     return (
       <View style={styles.basic}>
-      <Card style={styles.card}>
+      <Card style={styles.cards}>
         <Text>{activeJob[0].values.companyName}</Text>
         <Text>{activeJob[0].values.jobTitle}</Text>
         <Text>{activeJob[0].values.jobID}</Text>
         <Text>{activeJob[0].values.dateApplied}</Text>
         <Text>{activeJob[0].values.addtlNotes}</Text>
+        <IconButton
+          title='Edit Notes'
+          icon='delete'
+          onPress={() => console.log('pressed!')} />
+
       </Card>
       </View>
     )
@@ -74,6 +79,16 @@ const Jobs = () => {
 
 
   const JobTrackHomeScreen = ({navigation}) => {
+
+    const deleteItem = async (id) => {
+
+      const newJobList = await job.filter(item => {
+        if (item.values.jobID !== id)
+          return item;
+      })
+      setJob(newJobList)
+    }
+
 
 
     const renderItem = ({item}) => {
@@ -86,7 +101,7 @@ const Jobs = () => {
   
       return (
         <View style={styles.basic}>
-        <Card style={styles.card}>
+        <Card style={styles.cards}>
 
           <TouchableOpacity
             style={styles.jobButton}
@@ -102,6 +117,13 @@ const Jobs = () => {
             mode="contained"
             style={{color: '#F9665E'}}
             >More Details</Button>
+
+            <IconButton 
+              title='Delete'
+              icon='delete'
+              mode='outlined'
+              onPress={() => deleteItem(item.values.jobID)}/>
+
     
           </TouchableOpacity>
         
@@ -116,7 +138,7 @@ const Jobs = () => {
     return (
       <>
       <View style={styles.basic}>
-      <Card style={styles.card}>
+      <Card style={styles.cards}>
       <Formik
         initialValues={{
           companyName: '',
