@@ -5,6 +5,9 @@ import Constants from 'expo-constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
+
 const styles = StyleSheet.create({
   basic: {
     flexDirection: 'row',
@@ -137,15 +140,34 @@ const DevCardList = () => {
 
 
 export default function DevList() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
 
-      <Title>Meet the Devs</Title>
-      <DevCardList />
-      
-      </ScrollView>
-    </SafeAreaView>
+  const Dev = () => {
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+  
+        <Title>Meet the Devs</Title>
+        <DevCardList />
+        
+        </ScrollView>
+      </SafeAreaView>
+    );
+
+  }
+
+
+
+  return (
+    <>
+    <Stack.Navigator>
+
+      <Stack.Screen 
+        name='Meet the Devs'
+        component={Dev} />
+
+    </Stack.Navigator>
+    </>
   );
 }
 
