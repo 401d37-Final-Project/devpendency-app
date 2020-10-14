@@ -9,6 +9,7 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-n
 import Bookmarks from './components/Bookmarks.js';
 import JobAdd from './components/JobAdd.js';
 import Devnap from './components/Sketch.js';
+import AboutUs from './components/DevList.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -62,6 +63,8 @@ export default function App() {
         <Tab.Screen name="Devnap" component={Devnap} />
         <Tab.Screen name="Bookmarks" component={Bookmarks} />
         <Tab.Screen name="Job App Track" component={JobAdd} />
+        <Tab.Screen name="Dev List" component={AboutUs} />
+        
     
 
       </Tab.Navigator>
