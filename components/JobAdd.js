@@ -178,7 +178,7 @@ const Jobs = () => {
   </Formik>
   
   <FlatList
-    keyExtractor={(item) => item.id}
+    keyExtractor={(value, index) => index.toString()}
     data={job}
     renderItem={renderItem}
      />
