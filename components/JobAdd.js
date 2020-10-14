@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { StyleSheet, Button, View, TextInput,Text, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 
-import { Card } from 'react-native-paper';
+import { Card, IconButton } from 'react-native-paper';
 
 import { Formik } from 'formik';
 
@@ -49,6 +49,11 @@ const Jobs = () => {
         <Text>{activeJob[0].values.jobID}</Text>
         <Text>{activeJob[0].values.dateApplied}</Text>
         <Text>{activeJob[0].values.addtlNotes}</Text>
+        <IconButton
+          title='Edit Notes'
+          icon='delete'
+          onPress={() => console.log('pressed!')} />
+
       </Card>
         </>
     )
@@ -56,6 +61,16 @@ const Jobs = () => {
 
 
   const JobTrackHomeScreen = ({navigation}) => {
+
+    const deleteItem = async (id) => {
+
+      const newJobList = await job.filter(item => {
+        if (item.values.jobID !== id)
+          return item;
+      })
+      setJob(newJobList)
+    }
+
 
 
     const renderItem = ({item}) => {
@@ -80,9 +95,15 @@ const Jobs = () => {
             <Text>{item.values.dateApplied}</Text>
 
             <Button
-            title='More Details'
-            onPress={handleJobDeetsPress}
+              title='More Details'
+              onPress={handleJobDeetsPress}
             />
+
+            <IconButton 
+              title='Delete'
+              icon='delete'
+              mode='outlined'
+              onPress={() => deleteItem(item.values.jobID)}/>
     
           </TouchableOpacity>
         
