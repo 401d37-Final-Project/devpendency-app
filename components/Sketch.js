@@ -59,7 +59,8 @@ const testStorageSet = async () => {
 
 const testStorageGet = async () => {
   try {
-    return await AsyncStorage.getItem('key')
+    let get = await AsyncStorage.getItem('key')
+    return get
   } catch(e) {
     console.log(e)
   }
@@ -179,9 +180,9 @@ export default function Sketch() {
         </TouchableOpacity>
         <TouchableOpacity
           style={{ height: 50, width: 50 }}
-          onPress={() => {
+          onPress={ async() => {
             // setObjValue(path)
-            console.log(testStorageSet())
+            console.log(await testStorageSet())
             while (pathRef.length > 1) {
               pathRef.pop();
             }
@@ -195,9 +196,9 @@ export default function Sketch() {
         </TouchableOpacity>
         <TouchableOpacity
         style={{ height: 50, width: 50 }}
-          onPress={() => {
+          onPress={ async() => {
             // console.log('savedDrawings', getObj())
-            console.log('savedTest', testStorageGet())
+            console.log('savedTest', await testStorageGet())
           }}
         >
           <Text style={{ lineHeight: 50, textAlign: 'center' }}>Get</Text>

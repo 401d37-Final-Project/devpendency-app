@@ -78,7 +78,7 @@ const Bookmarks = (props) => {
             keyExtractor={(item) => item.id}
             item={item}>
             <Button
-              mode="outlined" onPress={handleClick}>
+              mode="contained" onPress={handleClick}>
               {item.values.name}
             </Button>
           </TouchableOpacity>
@@ -133,7 +133,7 @@ const Bookmarks = (props) => {
                 value={values.description}
                 onChangeText={handleChange('description')} />
               <Button
-                mode="outlined"
+                mode="contained"
                 onPress={handleSubmit}
                 >
                 Submit
