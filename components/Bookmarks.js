@@ -48,7 +48,10 @@ const theme = {
 
 const Bookmarks = (props) => {
 
-  const [bookmark, setBookmarks] = useState([]);
+
+  const Bookmark = () => {
+
+    const [bookmark, setBookmarks] = useState([]);
   const bookmarkList = bookmark;
 
 
@@ -139,6 +142,28 @@ const Bookmarks = (props) => {
 
       </>
     </PaperProvider>
+  );
+
+
+
+
+
+  }
+
+  
+
+
+
+  return (
+    <>
+    <Stack.Navigator>
+
+      <Stack.Screen 
+        name='Bookmarks'
+        component={Bookmark} />
+
+    </Stack.Navigator>
+    </>
   );
 
 };

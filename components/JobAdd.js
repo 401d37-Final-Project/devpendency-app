@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { StyleSheet, Button, View, TextInput,Text, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 
-import { Card } from 'react-native-elements';
+import { Card } from 'react-native-paper';
 
 import { Formik } from 'formik';
 
