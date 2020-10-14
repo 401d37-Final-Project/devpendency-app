@@ -45,78 +45,50 @@ const theme = {
 export default function App() {
 
 
-
-  const HomeScreen = ({ navigation }) => {
-    return (
-      // <>
-
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-
-      
-      <Text>Welcome, Developer to </Text>
-      <Image 
-        source={require('./assets/logo_dark.png')}
-        style={styles.logo}/>
-
-
-
- </View>
-        // </>
-
-    );
-  };
-
-
-
-
   return (
 
     <PaperProvider theme={theme}>
       <NavigationContainer theme={theme}>
         <Tab.Navigator
-                screenOptions={({ route }) => ({
-                  tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
-        
-                    if (route.name === 'Home') {
-                      iconName = focused
-                        ? 'md-home'
-                        : 'ios-home';
-                    } else if (route.name === 'Napkin') {
-                      iconName = focused ? 'ios-list-box' : 'ios-list';
-                    } else if (route.name === 'Bookmarks') {
-                      iconName = focused ? 'ios-list-box' : 'md-book';
-                    } else if (route.name === 'Job Tracker') {
-                      iconName = focused ? 'ios-list-box' : 'md-document';
-                    } else if (route.name === 'About the Devs') {
-                      iconName = focused ? 'ios-list-box' : 'ios-person';
-                    }
-        
-                    // You can return any component that you like here!
-                    return <Ionicons name={iconName} size={size} color={color} />;
-                  },
-                })}
-                tabBarOptions={{
-                  activeTintColor: '#F9665E',
-                  inactiveTintColor: '#000',
-                }}
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+
+              if (route.name === 'Home') {
+                iconName = focused
+                  ? 'md-home'
+                  : 'ios-home';
+              } else if (route.name === 'Napkin') {
+                iconName = focused ? 'ios-list-box' : 'ios-list';
+              } else if (route.name === 'Bookmarks') {
+                iconName = focused ? 'ios-list-box' : 'md-book';
+              } else if (route.name === 'Job Tracker') {
+                iconName = focused ? 'ios-list-box' : 'md-document';
+              } else if (route.name === 'About the Devs') {
+                iconName = focused ? 'ios-list-box' : 'ios-person';
+              }
+
+              // You can return any component that you like here!
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+          })}
+          tabBarOptions={{
+            activeTintColor: '#F9665E',
+            inactiveTintColor: '#000',
+          }}
         >
           <Tab.Screen
             name="Home"
             component={HomeScreen}
-            
           />
           <Tab.Screen name="Napkin" component={Devnap} />
           <Tab.Screen name="Bookmarks" component={Bookmarks} />
           <Tab.Screen name="Job Tracker" component={JobAdd} />
           <Tab.Screen name="About the Devs" component={AboutUs} />
-          
-      
 
         </Tab.Navigator>
       </NavigationContainer>
     </PaperProvider>
-
 
   );
 };

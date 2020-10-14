@@ -14,13 +14,12 @@ const styles = StyleSheet.create({
 
 const HomeScreen = () => {
   return (
-    <>
-
-    <Image 
-      source={require('../assets/logo.png')}
-      style={styles.logo}/>
-
-    </>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Welcome, Developer to </Text>
+      <Image
+        source={require('../assets/logo_dark.png')}
+        style={styles.logo} />
+    </View>
 
   );
 };
