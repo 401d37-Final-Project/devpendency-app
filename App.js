@@ -37,7 +37,8 @@ const theme = {
     primary: '#F9665E',
     accent: '#EEF1E6',
     background: '#2E373E',
-    text: '#000',
+    text: '#fff',
+    surface: '#A2A2A2'
   },
   fonts: configureFonts(fontConfig),
 };
@@ -62,9 +63,9 @@ export default function App() {
                 iconName = focused ? 'ios-list-box' : 'ios-list';
               } else if (route.name === 'Bookmarks') {
                 iconName = focused ? 'ios-list-box' : 'md-book';
-              } else if (route.name === 'Job Tracker') {
+              } else if (route.name === 'Jobs') {
                 iconName = focused ? 'ios-list-box' : 'md-document';
-              } else if (route.name === 'About the Devs') {
+              } else if (route.name === 'About') {
                 iconName = focused ? 'ios-list-box' : 'ios-person';
               }
 
@@ -83,8 +84,8 @@ export default function App() {
           />
           <Tab.Screen name="Napkin" component={Devnap} />
           <Tab.Screen name="Bookmarks" component={Bookmarks} />
-          <Tab.Screen name="Job Tracker" component={JobAdd} />
-          <Tab.Screen name="About the Devs" component={AboutUs} />
+          <Tab.Screen name="Jobs" component={JobAdd} />
+          <Tab.Screen name="About" component={AboutUs} />
 
         </Tab.Navigator>
       </NavigationContainer>

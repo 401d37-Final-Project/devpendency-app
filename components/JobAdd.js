@@ -4,9 +4,8 @@ import React, { useState, useRef } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { StyleSheet, Button, View, TextInput,Text, FlatList, TouchableOpacity, StatusBar } from 'react-native';
-
-import { Card } from 'react-native-elements';
+import { StyleSheet, Button, View, TextInput, FlatList, TouchableOpacity, StatusBar } from 'react-native';
+import { Title, Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import { Formik } from 'formik';
 
@@ -14,12 +13,30 @@ const Stack = createStackNavigator();
 // const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
+  input: {
+    margin: 15,
+    paddingLeft: 10,
+    borderColor: 'black',
+    borderWidth: 1,
+    width: 275,
+  },
   jobButton: {
     marginTop:20,
     alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10
+    padding: 10,
   },
+  basic: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  cards: {
+    flex: 1,
+    padding: 20,
+    marginTop: 20,
+    maxWidth: '80%',
+    elevation: 8,
+  }
 });
 
 const Jobs = () => {
@@ -42,15 +59,15 @@ const Jobs = () => {
     console.log('ACTIVE JOB', activeJob)
 
     return (
-      <>
-      <Card>
+      <View style={styles.basic}>
+      <Card style={styles.card}>
         <Text>{activeJob[0].values.companyName}</Text>
         <Text>{activeJob[0].values.jobTitle}</Text>
         <Text>{activeJob[0].values.jobID}</Text>
         <Text>{activeJob[0].values.dateApplied}</Text>
         <Text>{activeJob[0].values.addtlNotes}</Text>
       </Card>
-        </>
+      </View>
     )
   };
 
@@ -67,8 +84,8 @@ const Jobs = () => {
   
   
       return (
-        <>
-        <Card>
+        <View style={styles.basic}>
+        <Card style={styles.card}>
 
           <TouchableOpacity
             style={styles.jobButton}
@@ -87,7 +104,7 @@ const Jobs = () => {
           </TouchableOpacity>
         
         </Card>
-      </>
+      </View>
   
       )
   
@@ -96,7 +113,8 @@ const Jobs = () => {
 
     return (
       <>
-  
+      <View style={styles.basic}>
+      <Card style={styles.card}>
       <Formik
         initialValues={{
           companyName: '',
@@ -114,61 +132,71 @@ const Jobs = () => {
         }}>
   
       {({ handleChange, handleSubmit, values }) => (
-      <View>
-        <Text>Company</Text>
-        <TextInput
-          style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={handleChange('companyName')}
-          value={values.companyName}
-          />
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={styles.heading} >Add a Job Application</Text>
+          {/* <Text>Company</Text> */}
+          <TextInput
+            style={styles.input}
+            placeholder={'Company'}
+            onChangeText={handleChange('companyName')}
+            value={values.companyName}
+            />
 
-        <Text>Job Title</Text>
-        <TextInput
-          style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={handleChange('jobTitle')}
-          value={values.jobTitle}
-          />
-        
-        <Text>Job ID (required) </Text>
-        <TextInput
-          style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={handleChange('jobID')}
-          value={values.jobID}
-          />
+          {/* <Text>Job Title</Text> */}
+          <TextInput
+            style={styles.input}
+            placeholder={'Job Title'}
+            onChangeText={handleChange('jobTitle')}
+            value={values.jobTitle}
+            />
+          
+          {/* <Text>Job ID (required) </Text> */}
+          <TextInput
+            style={styles.input}
+            placeholder={'Job ID (required)'}
+            onChangeText={handleChange('jobID')}
+            value={values.jobID}
+            />
 
-        <Text>Date Applied</Text>
-        <TextInput
-          style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={handleChange('dateApplied')}
-          value={values.dateApplied}
-          />
+          {/* <Text>Date Applied</Text> */}
+          <TextInput
+            style={styles.input}
+            placeholder={'Date Applied'}
+            onChangeText={handleChange('dateApplied')}
+            value={values.dateApplied}
+            />
 
-        <Text>Additional Notes</Text>
-        <TextInput
-          style={{ height: 60, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={handleChange('addtlNotes')}
-          value={values.addtlNotes}
-          multiline={true}
-          />
-  
-        <Button 
-          onPress={handleSubmit} 
-          title="Add Job" 
-          style={{ height: 60, marginTop: 10, borderColor: 'gray', borderWidth: 1 }}
-          />
-      </View>
+          {/* <Text>Additional Notes</Text> */}
+          <TextInput
+            style={styles.input}
+            placeholder={'Any Additional Notes'}
+            onChangeText={handleChange('addtlNotes')}
+            value={values.addtlNotes}
+            multiline={true}
+            />
+    
+          <Button 
+            onPress={handleSubmit} 
+            title="Add Job" 
+            style={{color: '#F9665E'}}
+            />
+            </View>
     )}
   </Formik>
+  </Card>
+  </View>
+
   
   <FlatList
+    style={{ marginVertical: 10 }}
     keyExtractor={(value, index) => index.toString()}
     data={job}
     renderItem={renderItem}
-     />
+    />
   
   </>
   
-  )
+  );
 
 
   }

@@ -1,9 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
-import { Title, Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Constants from 'expo-constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
   basic: {
@@ -21,16 +24,11 @@ const styles = StyleSheet.create({
   cards: {
     flex: 1,
     padding: 20,
-    marginTop: 60,
-    maxWidth: '80%',
+    marginTop: 10,
+    marginBottom: 30,
+    maxWidth: '100%',
     elevation: 8,
   }
-  
-  // buttonContainer: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'left',
-  //   alignContent: 'center',
-  // }
 });
 
 // const theme = {
@@ -135,17 +133,32 @@ const DevCardList = () => {
   );
 };
 
-
 export default function DevList() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
 
-      <Title>Meet the Devs</Title>
-      <DevCardList />
-      
-      </ScrollView>
-    </SafeAreaView>
+  const Dev = () => {
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+
+        <DevCardList />
+        
+        </ScrollView>
+      </SafeAreaView>
+    );
+
+  }
+
+  return (
+    <>
+    <Stack.Navigator>
+
+      <Stack.Screen 
+        name='Meet the Devs'
+        component={Dev} />
+
+    </Stack.Navigator>
+    </>
   );
 }
 
