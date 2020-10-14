@@ -3,6 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native';
 import Bookmarks from './components/Bookmarks.js';
@@ -12,16 +13,30 @@ import AboutUs from './components/DevList.js';
 
 const Tab = createBottomTabNavigator();
 
+const theme = {
+  ...DefaultTheme,
+  dark: true,
+  roundness: 5,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#F9665E',
+    accent: '#EEF1E6',
+    background: '#2E373E',
+    text: '#000',
+  },
+};
+
 export default function App() {
 
   const HomeScreen = ({ navigation }) => {
     return (
       <>
 
+
+      <Text>Welcome Developer!</Text>
       <Image 
         source={require('./assets/logo.png')}
         style={styles.logo}/>
-
 
 
         {/* <Button
@@ -45,7 +60,8 @@ export default function App() {
 
 
 
-      </>
+        </>
+
     );
   };
 
@@ -54,21 +70,24 @@ export default function App() {
 
   return (
 
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-        />
-        <Tab.Screen name="Devnap" component={Devnap} />
-        <Tab.Screen name="Bookmarks" component={Bookmarks} />
-        <Tab.Screen name="Job App Track" component={JobAdd} />
-        <Tab.Screen name="Dev List" component={AboutUs} />
-        
-    
+    <PaperProvider theme={theme}>
+      <NavigationContainer theme={theme}>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Home"
+            component={HomeScreen}
+          />
+          <Tab.Screen name="Devnap" component={Devnap} />
+          <Tab.Screen name="Bookmarks" component={Bookmarks} />
+          <Tab.Screen name="Job App Track" component={JobAdd} />
+          <Tab.Screen name="Dev List" component={AboutUs} />
+          
+      
 
-      </Tab.Navigator>
-    </NavigationContainer>
+        </Tab.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
+
   );
 };
 
