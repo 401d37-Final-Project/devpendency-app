@@ -30,7 +30,7 @@ const examplePath = [
 const setObjValue = async (drawing) => {
   const storedKey = new Date();
   const dataStructure = {
-      storedKey: drawing,
+      [storedKey]: drawing,
   };
   let merged
   try {
@@ -38,32 +38,17 @@ const setObjValue = async (drawing) => {
   } catch (e) {
     console.log(e)
   }
-  console.log(merged)
+
   if(!merged){
-    merged = await AsyncStorage.setItem('Napkins', JSON.stringify(dataStructure));
-    console.log('im here')
+    try {
+      merged = await AsyncStorage.setItem('Napkins', JSON.stringify(dataStructure));
+    } catch(e) {
+      console.log(e)
+    }
   }
-  console.log(merged)
+
 
 };
-
-const testStorageSet = async () => {
-  try {
-    await AsyncStorage.setItem('key', 'test')
-
-    return 
-  } catch(e) {
-    console.log(e)
-  }
-}
-
-const testStorageGet = async () => {
-  try {
-    return await AsyncStorage.getItem('key')
-  } catch(e) {
-    console.log(e)
-  }
-}
 
 const getObj = async () => {
   try {
@@ -74,6 +59,25 @@ const getObj = async () => {
     console.log(e)
   }
 }
+
+// const testStorageSet = async () => {
+//   try {
+//     await AsyncStorage.setItem('key', 'test')
+
+//     return 
+//   } catch(e) {
+//     console.log(e)
+//   }
+// }
+
+// const testStorageGet = async () => {
+//   try {
+//     return await AsyncStorage.getItem('key')
+//   } catch(e) {
+//     console.log(e)
+//   }
+// }
+
 
 export default function Sketch() {
 
@@ -88,7 +92,6 @@ export default function Sketch() {
     const updatePath = points => {
       setPath(points);
     }
-    console.log(pathRef)
   
     const panResponder = useRef(
       PanResponder.create({
@@ -97,18 +100,14 @@ export default function Sketch() {
         onMoveShouldSetPanResponder: (evt, gestureState) => true,
         onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
         onPanResponderGrant: () => {
-          console.log('onPanResponderGrant');
         },
         onPanResponderStart: () => {
-          console.log('onPanResponderStart');
         },
         onPanResponderMove: (event, gestureState) => { 
-          // console.log('gestureState', gestureState)
+
           const point = {
             x: gestureState.moveX - (width - (width * .95)),
             y: gestureState.moveY - (height - (height * .95)),
-            // x: event.nativeEvent.locationX,
-            // y: event.nativeEvent.locationY,
           };
   
   
@@ -117,10 +116,10 @@ export default function Sketch() {
           updatePath([...pathRef]);
         },
         onPanResponderRelease: () => {
-          console.log('onPanResponderRelease')
+
           pathRef.push([]);
           updatePath([...pathRef]);
-          console.log('pathref', pathRef)
+
         }
       })
     ).current;
@@ -179,9 +178,9 @@ export default function Sketch() {
         </TouchableOpacity>
         <TouchableOpacity
           style={{ height: 50, width: 50 }}
-          onPress={() => {
-            // setObjValue(path)
-            console.log(testStorageSet())
+          onPress={async () => {
+            await setObjValue(path)
+            // console.log(testStorageSet())
             while (pathRef.length > 1) {
               pathRef.pop();
             }
@@ -195,9 +194,9 @@ export default function Sketch() {
         </TouchableOpacity>
         <TouchableOpacity
         style={{ height: 50, width: 50 }}
-          onPress={() => {
-            // console.log('savedDrawings', getObj())
-            console.log('savedTest', testStorageGet())
+          onPress={async () => {
+            console.log('savedDrawings', await getObj())
+            // console.log('savedTest', testStorageGet())
           }}
         >
           <Text style={{ lineHeight: 50, textAlign: 'center' }}>Get</Text>
