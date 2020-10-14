@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
   },
   cards: {
     flex: 1,
-    flexWrap: 'wrap',
     padding: 20,
     marginTop: 5,
     marginLeft: 10,
