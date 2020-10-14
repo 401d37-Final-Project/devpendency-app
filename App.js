@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { Title, Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Constants from 'expo-constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -11,9 +11,12 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
   scrollView: {
-    backgroundColor: 'green',
     marginHorizontal: 20,
   },
+  cards: {
+    flex: 1,
+    padding: 20,
+  }
   // buttonContainer: {
   //   flexDirection: 'row',
   //   justifyContent: 'left',
@@ -21,74 +24,104 @@ const styles = StyleSheet.create({
   // }
 });
 
+const theme = {
+  ...DefaultTheme,
+  dark: true,
+  roundness: 5,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#EEF1E6',
+    accent: '#F9665E',
+    background: '#A2A2A2',
+    text: '#2E373E',
+  },
+};
+
 const peopleObjects = [
   {
     id: 1,
     name: 'Blake', 
     subtitle: 'Software Developer',
     content: 'Card content 1',
-    uri: 'https://picsum.photos/700'
+    uri: 'https://picsum.photos/700',
+    githubURL: 'url for github 1',
+    linkedinURL: 'url for linkedin 1'
   },
   {
     id: 2,
     name: 'Tia', 
     subtitle: 'Software Developer',
     content: 'Card content 2',
-    uri: 'https://picsum.photos/700'
+    uri: 'https://picsum.photos/700',
+    githubURL: 'url for github 2',
+    linkedinURL: 'url for linkedin 2'
   }, 
   {
     id: 3,
     name: 'Matt', 
     subtitle: 'Software Developer',
     content: 'Card content 3',
-    uri: 'https://picsum.photos/700'
+    uri: 'https://picsum.photos/700',
+    githubURL: 'url for github 3',
+    linkedinURL: 'url for linkedin 3'
   }, 
   {
     id: 4,
     name: 'Stephen', 
     subtitle: 'Software Developer',
     content: 'Card content 4',
-    uri: 'https://picsum.photos/700'
+    uri: 'https://picsum.photos/700',
+    githubURL: 'url for github 4',
+    linkedinURL: 'url for linkedin 4'
   }
 ];
 
-const gotoGithub = () => {
-  console.log('clicked on Github');
+const gotoGithub = (url) => {
+  console.log(`clicked on Github ${url}`);
+  return;
 }
 
-const RenderCard = props => {
+const gotoLinkedin = (url) => {
+  console.log(`clicked on linkedin ${url}`);
+  return;
+}
+
+const RenderDevCard = props => {
   return (
     <View>
-      <Card>
+      <Card style={styles.cards}>
         <Card.Title title={props.people.name} subtitle={props.people.subtitle} />
         <Card.Cover source={{ uri: props.people.uri }} />
           <Paragraph>{props.people.content}</Paragraph>
+
           <Card.Actions>
 
-            <Icon.Button
+            <TouchableOpacity onPress={() => gotoGithub(props.people.githubURL)}>
+            <Icon
               name='github'
-              backgroundColor='#2b3137'
-              onPress={gotoGithub()}
-            >
-            </Icon.Button>
+              size={25}
+              color='#2b3137'
+              style={{height:25,width:25}}/>
+            </TouchableOpacity>
 
-            <Icon.Button
+            <TouchableOpacity style={{marginHorizontal: 5}} onPress={() => gotoLinkedin(props.people.linkedinURL)}>
+            <Icon
               name='linkedin'
-              backgroundColor='#0e76a8'
-              // onPress={this.gotoLinkedin}
-            >
-            </Icon.Button>
+              size={25}
+              color='#0e76a8'
+              style={{height:25,width:25}}/>
+            </TouchableOpacity>
 
-            </Card.Actions>
+          </Card.Actions>
       </Card>
     </View>
   );
 };
 
-const RenderCardList = () => {
+const DevList = () => {
   return (
       peopleObjects.map(people => {
-        return <RenderCard people={people} key={people.id} />;
+        return <RenderDevCard people={people} key={people.id} />;
       })
   );
 };
@@ -96,13 +129,16 @@ const RenderCardList = () => {
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-      <Text>Meet the Devs</Text>
-      <RenderCardList />
-      
-      </ScrollView>
-    </SafeAreaView>
+    <PaperProvider theme={theme}>
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+
+        <Title>Meet the Devs</Title>
+        <DevList />
+        
+        </ScrollView>
+      </SafeAreaView>
+    </PaperProvider>
   );
 }
 
