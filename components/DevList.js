@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
   cards: {
     flex: 1,
     padding: 20,
+    marginTop: 60,
+    maxWidth: '80%',
   }
   // buttonContainer: {
   //   flexDirection: 'row',
@@ -24,18 +26,18 @@ const styles = StyleSheet.create({
   // }
 });
 
-const theme = {
-  ...DefaultTheme,
-  dark: true,
-  roundness: 5,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#EEF1E6',
-    accent: '#F9665E',
-    background: '#A2A2A2',
-    text: '#2E373E',
-  },
-};
+// const theme = {
+//   ...DefaultTheme,
+//   dark: true,
+//   roundness: 5,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#EEF1E6',
+//     accent: '#F9665E',
+//     background: '#A2A2A2',
+//     text: '#2E373E',
+//   },
+// };
 
 const peopleObjects = [
   {
@@ -129,16 +131,14 @@ const DevCardList = () => {
 
 export default function DevList() {
   return (
-    <PaperProvider theme={theme}>
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
 
-        <Title>Meet the Devs</Title>
-        <DevCardList />
-        
-        </ScrollView>
-      </SafeAreaView>
-    </PaperProvider>
+      <Title>Meet the Devs</Title>
+      <DevCardList />
+      
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
