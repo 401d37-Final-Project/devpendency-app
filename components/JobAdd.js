@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     width: 275,
   },
   jobButton: {
-    marginTop:20,
+    marginTop: 20,
     alignItems: "center",
     padding: 10,
     color: '#F9665E',
@@ -43,12 +43,12 @@ const styles = StyleSheet.create({
 
 const Jobs = () => {
 
-  const [job, setJob ] = useState([]);
+  const [job, setJob] = useState([]);
 
   const activeJobForDetails = useRef('')
 
 
-  const JobDeets = ({navigation}) => {
+  const JobDeets = ({ navigation }) => {
 
     console.log('NAVIGATION PROP', navigation)
 
@@ -62,24 +62,24 @@ const Jobs = () => {
 
     return (
       <View style={styles.basic}>
-      <Card style={styles.cards}>
-        <Text>{activeJob[0].values.companyName}</Text>
-        <Text>{activeJob[0].values.jobTitle}</Text>
-        <Text>{activeJob[0].values.jobID}</Text>
-        <Text>{activeJob[0].values.dateApplied}</Text>
-        <Text>{activeJob[0].values.addtlNotes}</Text>
-        <IconButton
-          title='Edit Notes'
-          icon='file-document-edit-outline'
-          onPress={() => console.log('pressed!')} />
+        <Card style={styles.cards}>
+          <Text>{activeJob[0].values.companyName}</Text>
+          <Text>{activeJob[0].values.jobTitle}</Text>
+          <Text>{activeJob[0].values.jobID}</Text>
+          <Text>{activeJob[0].values.dateApplied}</Text>
+          <Text>{activeJob[0].values.addtlNotes}</Text>
+          <IconButton
+            title='Edit Notes'
+            icon='file-document-edit-outline'
+            onPress={() => console.log('pressed!')} />
 
-      </Card>
+        </Card>
       </View>
     )
   };
 
 
-  const JobTrackHomeScreen = ({navigation}) => {
+  const JobTrackHomeScreen = ({ navigation }) => {
 
     const deleteItem = async (id) => {
 
@@ -92,152 +92,152 @@ const Jobs = () => {
 
 
 
-    const renderItem = ({item}) => {
+    const renderItem = ({ item }) => {
 
       function handleJobDeetsPress() {
         navigation.navigate('Back to Job List');
-        activeJobForDetails.current= item.values.jobID;
+        activeJobForDetails.current = item.values.jobID;
       }
-  
-  
+
+
       return (
         <View style={styles.basic}>
-        <Card style={styles.cards}>
+          <Card style={styles.cards}>
 
-          <TouchableOpacity
-            style={styles.jobButton}
-            keyExtractor={(item) => item.id}
-            item={item}>
+            <TouchableOpacity
+              style={styles.jobButton}
+              keyExtractor={(item) => item.id}
+              item={item}>
 
-            <Text>{item.values.companyName}</Text>
-            <Text>{item.values.jobTitle}</Text>
-            <Text>{item.values.dateApplied}</Text>
+              <Text>{item.values.companyName}</Text>
+              <Text>{item.values.jobTitle}</Text>
+              <Text>{item.values.dateApplied}</Text>
 
-            <IconButton
-              title='More Details'
-              icon='dots-vertical'
-              onPress={handleJobDeetsPress}
-            />
+              <IconButton
+                title='More Details'
+                icon='arrow-expand'
+                onPress={handleJobDeetsPress}
+              />
 
-            <IconButton 
-              title='Delete'
-              icon='delete'
-              onPress={() => deleteItem(item.values.jobID)}/>
+              <IconButton
+                title='Delete'
+                icon='delete'
+                onPress={() => deleteItem(item.values.jobID)} />
 
-    
-          </TouchableOpacity>
-        
-        </Card>
-      </View>
-  
+
+            </TouchableOpacity>
+
+          </Card>
+        </View>
+
       )
-  
+
     }
 
 
     return (
       <>
-      <View style={styles.basic}>
-      <Card style={styles.cards}>
-      <Formik
-        initialValues={{
-          companyName: '',
-          jobTitle: '',
-          jobID: '',
-          dateApplied: '',
-          addtlNotes: '',
-        }}
-    
-        onSubmit={ (values, {resetForm}) => {
+        <View style={styles.basic}>
+          <Card style={styles.cards}>
+            <Formik
+              initialValues={{
+                companyName: '',
+                jobTitle: '',
+                jobID: '',
+                dateApplied: '',
+                addtlNotes: '',
+              }}
 
-          setJob([...job, {values}]);
-          resetForm({values: ''})
-          
-        }}>
-  
-      {({ handleChange, handleSubmit, values }) => (
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          {/* <Text style={styles.heading} >Add a Job Application</Text> */}
-          {/* <Text>Company</Text> */}
-          <TextInput
-            style={styles.input}
-            placeholder={'Company'}
-            onChangeText={handleChange('companyName')}
-            value={values.companyName}
-            />
+              onSubmit={(values, { resetForm }) => {
+
+                setJob([...job, { values }]);
+                resetForm({ values: '' })
+
+              }}>
+
+              {({ handleChange, handleSubmit, values }) => (
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  {/* <Text style={styles.heading} >Add a Job Application</Text> */}
+                  {/* <Text>Company</Text> */}
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Company'}
+                    onChangeText={handleChange('companyName')}
+                    value={values.companyName}
+                  />
 
 
-          <TextInput
-            style={styles.input}
-            placeholder={'Job Title'}
-            onChangeText={handleChange('jobTitle')}
-            value={values.jobTitle}
-            />
-          
-          <TextInput
-            style={styles.input}
-            placeholder={'Job ID (required)'}
-            onChangeText={handleChange('jobID')}
-            value={values.jobID}
-            />
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Job Title'}
+                    onChangeText={handleChange('jobTitle')}
+                    value={values.jobTitle}
+                  />
 
-          <TextInput
-            style={styles.input}
-            placeholder={'Date Applied'}
-            onChangeText={handleChange('dateApplied')}
-            value={values.dateApplied}
-            />
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Job ID (required)'}
+                    onChangeText={handleChange('jobID')}
+                    value={values.jobID}
+                  />
 
-          <TextInput
-            style={styles.input}
-            placeholder={'Any Additional Notes'}
-            onChangeText={handleChange('addtlNotes')}
-            value={values.addtlNotes}
-            multiline={true}
-            />
-    
-          <Button 
-            onPress={handleSubmit}
-            mode="contained"
-            style={{color: '#F9665E'}}
-            >Add Job</Button>
-            </View>
-    )}
-  </Formik>
-  </Card>
-  </View>
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Date Applied'}
+                    onChangeText={handleChange('dateApplied')}
+                    value={values.dateApplied}
+                  />
 
-  
-  <FlatList
-    style={{ marginVertical: 10 }}
-    keyExtractor={(value, index) => index.toString()}
-    data={job}
-    renderItem={renderItem}
-    />
-  
-  </>
-  
-  );
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Any Additional Notes'}
+                    onChangeText={handleChange('addtlNotes')}
+                    value={values.addtlNotes}
+                    multiline={true}
+                  />
+
+                  <Button
+                    onPress={handleSubmit}
+                    mode="contained"
+                    style={{ color: '#F9665E' }}
+                  >Add Job</Button>
+                </View>
+              )}
+            </Formik>
+          </Card>
+        </View>
+
+
+        <FlatList
+          style={{ marginVertical: 10 }}
+          keyExtractor={(value, index) => index.toString()}
+          data={job}
+          renderItem={renderItem}
+        />
+
+      </>
+
+    );
 
 
   }
 
 
-return (
+  return (
 
-  <Stack.Navigator>
+    <Stack.Navigator>
 
-    <Stack.Screen
-      name='Track Job Applications'
-      component={JobTrackHomeScreen} />
-    <Stack.Screen 
-      name="Back to Job List" 
-      component={JobDeets} />
+      <Stack.Screen
+        name='Track Job Applications'
+        component={JobTrackHomeScreen} />
+      <Stack.Screen
+        name="Back to Job List"
+        component={JobDeets} />
 
-  </Stack.Navigator>
+    </Stack.Navigator>
 
-)
-  
+  )
+
 };
 
 export default Jobs;
