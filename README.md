@@ -80,13 +80,13 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 
 ## Original Wireframes
 
-![wireframe1](assets/wireframe1.png)
-![wireframe2](assets/wireframe2.png)
-![wireframe3](assets/wireframe3.png)
+![wireframe1](assets/images/wireframe1.png)
+![wireframe2](assets/images/wireframe2.png)
+![wireframe3](assets/images/wireframe3.png)
 
 ## UML
 
-![domain-model](assets/uml.png)
+![domain-model](assets/images/uml.png)
 
 ## Libraries
 
@@ -97,6 +97,7 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 - [React Native Community Picker](https://www.npmjs.com/package/@react-native-community/picker)
 - [React Native Async Storage](https://reactnative.dev/docs/asyncstorage)
 - [Formik](https://formik.org/)
+- [Yum](https://github.com/jquense/yup)
 - [Expo](https://expo.io/)
 - [Vector Icons](https://docs.expo.io/guides/icons/)
 - [Material Community Icons](https://reactnativeelements.com/docs/icon/)
