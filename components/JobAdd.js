@@ -50,15 +50,7 @@ const Jobs = () => {
 
   const JobDeets = ({ navigation }) => {
 
-    console.log('NAVIGATION PROP', navigation)
-
-    console.log('STATE', job)
-
-    console.log('active job useRef', activeJobForDetails)
-
     const activeJob = job.filter(job => job.values.jobID === activeJobForDetails.current)
-
-    console.log('ACTIVE JOB', activeJob)
 
     return (
       <View style={styles.basic}>
