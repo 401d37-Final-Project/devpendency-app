@@ -295,7 +295,7 @@ export default function Sketch() {
     <Stack.Navigator>
 
       <Stack.Screen 
-        name='Dev Napkin Sketch'
+        name='Dev Napkin'
         component={Sketch} />
 
       <Stack.Screen 

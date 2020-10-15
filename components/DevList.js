@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity, Linking, Alert, WebView } from 'react-native';
+import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity, Linking, Alert, Image, WebView } from 'react-native';
 import { Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Constants from 'expo-constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { createStackNavigator } from '@react-navigation/stack';
+
 const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
@@ -26,8 +27,10 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 10,
     marginBottom: 30,
-    maxWidth: '100%',
+    maxWidth: '85%',
     elevation: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
 
@@ -59,7 +62,7 @@ const peopleObjects = [
     name: 'Tia', 
     subtitle: 'Software Developer',
     content: 'Card content 2',
-    uri: 'https://picsum.photos/700',
+    uri: require('../assets/images/tia.jpg'),
     githubURL: 'https://www.linkedin.com/in/tia-low',
     linkedinURL: 'url for linkedin 2'
   }, 
@@ -76,8 +79,8 @@ const peopleObjects = [
     id: 4,
     name: 'Stephen', 
     subtitle: 'Software Developer',
-    content: 'Card content 4',
-    uri: 'https://picsum.photos/700',
+    content: 'Steve is a music obsessed full stack software developer from Seattle. If he’s not performing, discovering, or discussing music, he’s likely either asleep or in the mountains.',
+    uri: require('../assets/images/steve.png'),
     githubURL: 'https://github.com/SBALDOCK',
     linkedinURL: 'url for linkedin 4'
   }
@@ -100,7 +103,10 @@ const RenderDevCard = props => {
     <View style={styles.basic}>
       <Card style={styles.cards}>
         <Card.Title title={props.people.name} subtitle={props.people.subtitle} />
-        <Card.Cover source={{ uri: props.people.uri }} />
+        <Image
+        source={props.people.uri}
+        style={{height: 250, width: 250}}
+        />
           <Paragraph>{props.people.content}</Paragraph>
 
           <Card.Actions>

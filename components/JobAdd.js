@@ -17,18 +17,21 @@ const styles = StyleSheet.create({
   input: {
     margin: 15,
     paddingLeft: 10,
-    borderColor: 'black',
+    borderColor: '#A2A2A2',
     borderWidth: 1,
     width: 275,
+    color: '#EEF1E6'
   },
   jobButton: {
+    flex: 1,
+    flexDirection: 'column',
     marginTop: 20,
     alignItems: "center",
     padding: 10,
     color: '#F9665E',
   },
   basic: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignContent: 'center',
   },
@@ -36,10 +39,22 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     marginTop: 20,
-
     maxWidth: '80%',
     elevation: 8,
-  }
+  },
+  text: {
+    flex: 3,
+    justifyContent: 'flex-end',
+    alignSelf: 'stretch',
+  },
+  expand: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  delete: {
+    flex: 0,
+    alignItems: 'flex-end',
+  },
 });
 
 const Jobs = () => {
@@ -98,21 +113,25 @@ const Jobs = () => {
               keyExtractor={(item) => item.id}
               item={item}>
 
-              <Text>{item.values.companyName}</Text>
-              <Text>{item.values.jobTitle}</Text>
-              <Text>{item.values.dateApplied}</Text>
+              <Text style={styles.text}>{item.values.companyName}</Text>
+              <Text style={styles.text}>{item.values.jobTitle}</Text>
+              <Text style={styles.text}>{item.values.dateApplied}</Text>
 
+              <TouchableOpacity style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
               <IconButton
+                style={styles.expand}
                 title='More Details'
                 icon='arrow-expand'
                 onPress={handleJobDeetsPress}
-              />
+                />
 
               <IconButton
+                style={styles.delete}
                 title='Delete'
                 icon='delete'
                 onPress={() => deleteItem(item.values.jobPostURL)} />
 
+              </TouchableOpacity>
 
             </TouchableOpacity>
 
@@ -158,6 +177,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Company *'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('companyName')}
                     value={values.companyName}
                   />
@@ -166,6 +186,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Job Title'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('jobTitle')}
                     value={values.jobTitle}
                   />
@@ -180,6 +201,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Job ID (required)'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('jobID')}
                     value={values.jobID}
                   />
@@ -187,6 +209,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Date Applied'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('dateApplied')}
                     value={values.dateApplied}
                   />
@@ -194,6 +217,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Any Additional Notes'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('addtlNotes')}
                     value={values.addtlNotes}
                     multiline={true}

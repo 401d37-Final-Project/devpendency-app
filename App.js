@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { configureFonts, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
+import { AppLoading } from 'expo';
+import { useFonts } from '@expo-google-fonts/inter';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
@@ -38,13 +40,19 @@ const theme = {
     accent: '#EEF1E6',
     background: '#2E373E',
     text: '#fff',
-    surface: '#A2A2A2'
+    surface: '#414A4E'
   },
-  fonts: configureFonts(fontConfig),
+  // fonts: configureFonts(fontConfig),
 };
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    'Exo-Medium': require('./assets/fonts/Exo-Medium.ttf'),
+  });
 
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
 
   return (
     
@@ -74,8 +82,12 @@ export default function App() {
             },
           })}
           tabBarOptions={{
-            activeTintColor: '#F9665E',
-            inactiveTintColor: '#000',
+            activeTintColor: '#EEF1E6',
+            inactiveTintColor: '#414A4E',
+            style: {
+              paddingVertical: 5,
+              backgroundColor: '#F9665E',
+            }
           }}
         >
           <Tab.Screen
@@ -91,6 +103,7 @@ export default function App() {
     </PaperProvider>
     
   );
+  };
 };
 
 
