@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { configureFonts, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
+import { AppLoading } from 'expo';
+import { useFonts } from '@expo-google-fonts/inter';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
@@ -40,11 +42,17 @@ const theme = {
     text: '#fff',
     surface: '#A2A2A2'
   },
-  fonts: configureFonts(fontConfig),
+  // fonts: configureFonts(fontConfig),
 };
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    'Exo-Medium': require('./assets/fonts/Exo-Medium.ttf'),
+  });
 
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
 
   return (
     
@@ -91,6 +99,7 @@ export default function App() {
     </PaperProvider>
     
   );
+  };
 };
 
 

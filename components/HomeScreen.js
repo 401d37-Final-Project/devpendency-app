@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   cards: {
     flex: 1,
     flexWrap: 'wrap', 
-    padding: 20,
+    padding: 15,
     marginTop: 5,
     marginHorizontal: 10,
     marginBottom: 20,
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 18,
+    fontFamily: 'Exo-Medium',
   }
 });
 
@@ -47,7 +48,7 @@ const HomeScreen = () => {
 
     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'}}>
       <Image
-        source={require('../assets/logo_dark.png')}
+        source={require('../assets/images/logo_dark.png')}
         style={styles.logo} />
     </View>
 
@@ -74,7 +75,7 @@ const HomeScreen = () => {
             size={80}
             color={'black'}
             style={styles.heroIcon}/>
-          <Paragraph style={styles.text}>Need to keep track of all your resources? Save them here and follow the link directly to the browser. </Paragraph>
+          <Paragraph style={styles.text}>Need to keep track of all your resources? Save them here and link directly to the browser. </Paragraph>
         </Card>
 
         <Card
@@ -84,7 +85,7 @@ const HomeScreen = () => {
             size={80}
             color={'black'}
             style={styles.heroIcon}/>
-          <Paragraph style={styles.text}>A Dev is always on the lookout for new opportunities! Track your job apps here. </Paragraph>
+          <Paragraph style={styles.text}>A Dev is always on the lookout for new opportunities! Track your job app's here. </Paragraph>
         </Card>
 
     </View>
