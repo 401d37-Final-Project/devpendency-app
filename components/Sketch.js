@@ -8,23 +8,25 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
+let { width, height } = Dimensions.get('window');
+width *= .95
+height *= .95
+
 const examplePath = [
   [
     { x: 90, y: 300 },
-    { x: 170, y: 45 },
-    { x: 250, y: 290 },
-    { x: 45, y: 130 },
-    { x: 285, y: 130 },
-    { x: 90, y: 298 },
+    { x: 90, y: 45 },
+    { x: 400, y: 45 },
+    { x: 400, y: 300},
+    { x: 90, y: 300 },
   ],
   [
-    { x: 95, y: 300 },
-    { x: 175, y: 45 },
-    { x: 255, y: 290 },
-    { x: 50, y: 130 },
-    { x: 290, y: 130 },
-    { x: 95, y: 298 },
-  ],
+    { x: 200, y: 290 },
+    { x: 200, y: 220 },
+    { x: 300, y: 220 },
+    { x: 300, y: 290 },
+    { x: 200, y: 290 }
+  ]
 ];
 
 
@@ -46,42 +48,22 @@ const setObjValue = async (drawing) => {
 
 const getObj = async () => {
   try {
-
-  const jsonValue = await AsyncStorage.getItem('Napkins')
-  return jsonValue != null ? JSON.parse(jsonValue) : null
+    const jsonValue = await AsyncStorage.getItem('Napkins')
+    return jsonValue != null ? JSON.parse(jsonValue) : null
   } catch(e) {
     console.log(e)
   }
 }
 
-// const testStorageSet = async () => {
-//   try {
-//     await AsyncStorage.setItem('key', 'test')
-
-//     return 
-//   } catch(e) {
-//     console.log(e)
-//   }
-// }
-
-// const testStorageGet = async () => {
-//   try {
-//     return await AsyncStorage.getItem('key')
-//   } catch(e) {
-//     console.log(e)
-//   }
-// }
-
-
 export default function Sketch() {
 
-
+  const [color, setColor] = useState('black')
+  const [strokeWidth, setStrokeWidth] = useState(5)
+  
   const Sketch = ({ navigation }) => {
-
-    let pathRef = useRef([[]]).current;
     const [path, setPath] = useState(examplePath);
-    const [color, setColor] = useState('black')
-    const [strokeWidth, setStrokeWidth] = useState(5)
+    
+    let pathRef = useRef([[]]).current;
   
     const updatePath = points => {
       setPath(points);
@@ -119,18 +101,14 @@ export default function Sketch() {
     ).current;
   
   
-    let { width, height } = Dimensions.get('window');
-    width *= .95
-    height *= .95
+    
     
     const uberPoints = path.map(points => {
       return points.map(p => `${p.x},${p.y}`).join(' ');
     });
 
     return (
-
       <>
-
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Picker
           selectedValue={color}
@@ -138,7 +116,7 @@ export default function Sketch() {
           onValueChange={(itemValue) => setColor(itemValue)}>
           <Picker.Item label="Black" value="black" />
           <Picker.Item label="Red" value="red" />
-          <Picker.Item label="Green" value="red" />
+          <Picker.Item label="Green" value="green" />
           <Picker.Item label="Blue" value="blue" />
           <Picker.Item label="Yellow" value="yellow" />
         </Picker>
@@ -187,8 +165,8 @@ export default function Sketch() {
           <Text style={{ lineHeight: 50, textAlign: 'center' }}>Save</Text>
         </TouchableOpacity>
         <TouchableOpacity
-        style={{ height: 50, width: 50 }}
-          onPress={() => navigation.navigate('Saved Napkins')}
+          style={{ height: 50, width: 50 }}
+            onPress={() => navigation.navigate('Saved Napkins')}
         >
           <Text style={{ lineHeight: 50, textAlign: 'center' }}>Get</Text>
         </TouchableOpacity>
@@ -216,44 +194,54 @@ export default function Sketch() {
     const savedNapkinRef = useRef('')
   
       const ViewDrawing = () => {
-  
+        const uberPoints = savedNapkinRef.current.map(points => {
+          return points.map(p => `${p.x},${p.y}`).join(' ');
+        });
         return (
-          <Text>IN VIEW DRAWING</Text>
+          <View style={styles.container}>
+            <Svg height="100%" width="100%" viewBox={`0 0 ${width} ${height}`}>
+              {uberPoints.map((points, index) => (
+                <Polyline
+                  key={index}
+                  points={points}
+                  fill="none"
+                  stroke={color}
+                  strokeWidth={strokeWidth}
+                />
+          ))}
+        </Svg>
+      </View>
         )
   
       }
   
   const SavedNapkins =  ({navigation}) => {
 
-    const [ savedNapkins, setSavedNapkins ] = useState([])
-
-
-
-    useEffect(() => {
-
-      const getSavedObj = async () => {
-
-        const list = await getObj();
-
-        setSavedNapkins(list)
-
-      }
-  
-      getSavedObj();
-     
-
-    }, [])
+    const [ savedNapkins, setSavedNapkins ] = useState({})
+    const [ coordsArrays, setCoordsArrays ] = useState([])
     
-
-    const napkinArr = Object.entries(savedNapkins);
-
-
+    useEffect(() => {
+      const getSavedObj = async () => {
+        let list = await getObj();
+        setSavedNapkins(list)
+        setCoordsArrays(Object.entries(list))
+      }
+      getSavedObj();
+    }, [])
+    console.log(savedNapkins)
+    const deleteNapkin = async (date) => {
+      let napkins = savedNapkins
+      delete napkins[date]
+      await AsyncStorage.setItem('Napkins', JSON.stringify(napkins))
+      setSavedNapkins(napkins)
+      setCoordsArrays(Object.entries(napkins))
+    }
+    
     const renderItem = ({ item }) => {
 
-
-      function renderDrawing(coords) {
-        navigation.navigate('View Drawing');
-        savedNapkinRef.current = coords;
+      const  renderDrawing = (coords) => {
+        navigation.navigate('View Drawing')
+        savedNapkinRef.current = coords
       }
 
 
@@ -266,6 +254,10 @@ export default function Sketch() {
             title='View'
             icon='arrow-expand'
             onPress={() => renderDrawing(item[1])}/>
+          <IconButton
+            title='Delete'
+            icon='delete'
+            onPress={async () => await deleteNapkin(item[0])}/>
 
         </Card>
 
@@ -281,7 +273,7 @@ export default function Sketch() {
 
       <FlatList
       keyExtractor={(value, index) => index.toString()}
-      data={napkinArr}
+      data={coordsArrays}
       renderItem={renderItem}
        />
       </>
