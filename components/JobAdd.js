@@ -4,7 +4,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { StyleSheet, View, TextInput, FlatList, TouchableOpacity, StatusBar } from 'react-native';
+import { StyleSheet, View, TextInput, FlatList, SafeAreaView, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+
 import { Title, Button, IconButton, Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -114,6 +115,27 @@ const Jobs = () => {
     return setJob(value)
   }
 
+  useEffect(() => {
+
+    const fetchData = async () => {
+  
+      let jsonValue = await AsyncStorage.getItem('Jobs');
+
+      jsonValue = jsonValue != null ? JSON.parse(jsonValue) : null
+
+      if(jsonValue) {
+        setJobWrapper(jsonValue);
+      } else {
+        return Promise.resolve();
+      }
+
+
+  }
+  
+      fetchData();
+
+  }, [])
+
   const JobDeets = ({ navigation }) => {
 
     
@@ -140,23 +162,16 @@ const Jobs = () => {
   };
 
 
-  const fetchData = async () => {
 
-    const list = await getObj();
 
-    if(list) {
-      console.log('job list in useEffect:', list)
-      setJobWrapper(list);
-      return;
-    } else {
-      return Promise.resolve();
-    }
-  }
-
-  fetchData();
 
   const JobTrackHomeScreen = ({ navigation }) => {
 
+
+
+ 
+  
+ 
 
 
     const deleteItem = async (id) => {
@@ -167,6 +182,8 @@ const Jobs = () => {
       })
       setJobWrapper(newJobList)
       setObjValue(newJobList)
+
+      console.log('DELETED ITEM!')
     }
 
 
@@ -177,6 +194,9 @@ const Jobs = () => {
         navigation.navigate('Back to Job List');
         activeJobForDetails.current = item.values.jobPostURL;
       }
+
+
+      console.log('RENDERING ITEMS!')
 
 
       return (
