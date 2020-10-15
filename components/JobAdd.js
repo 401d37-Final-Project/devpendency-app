@@ -9,6 +9,7 @@ import { Title, Button, IconButton, Paragraph, Text, Card, DefaultTheme, Provide
 
 
 import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 const Stack = createStackNavigator();
 
@@ -57,14 +58,10 @@ const Jobs = () => {
         <Card style={styles.cards}>
           <Text>{activeJob[0].values.companyName}</Text>
           <Text>{activeJob[0].values.jobTitle}</Text>
+          <Text>{activeJob[0].values.jobPostURL}</Text>
           <Text>{activeJob[0].values.jobID}</Text>
           <Text>{activeJob[0].values.dateApplied}</Text>
           <Text>{activeJob[0].values.addtlNotes}</Text>
-          <IconButton
-            title='Edit Notes'
-            icon='file-document-edit-outline'
-            onPress={() => console.log('pressed!')} />
-
         </Card>
       </View>
     )
@@ -76,7 +73,7 @@ const Jobs = () => {
     const deleteItem = async (id) => {
 
       const newJobList = await job.filter(item => {
-        if (item.values.jobID !== id)
+        if (item.values.jobPostURL !== id)
           return item;
       })
       setJob(newJobList)
@@ -114,7 +111,7 @@ const Jobs = () => {
               <IconButton
                 title='Delete'
                 icon='delete'
-                onPress={() => deleteItem(item.values.jobID)} />
+                onPress={() => deleteItem(item.values.jobPostURL)} />
 
 
             </TouchableOpacity>
@@ -135,10 +132,18 @@ const Jobs = () => {
               initialValues={{
                 companyName: '',
                 jobTitle: '',
+                jobPostURL: '',
                 jobID: '',
                 dateApplied: '',
                 addtlNotes: '',
               }}
+
+              validationSchema={Yup.object().shape({
+                companyName: Yup.string().required('Company name is required'),
+                jobPostURL: Yup.string().required('Job post URL is required'),
+              })}
+
+              validateOnMount
 
               onSubmit={(values, { resetForm }) => {
 
@@ -149,11 +154,10 @@ const Jobs = () => {
 
               {({ handleChange, handleSubmit, values }) => (
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                  {/* <Text style={styles.heading} >Add a Job Application</Text> */}
-                  {/* <Text>Company</Text> */}
+ 
                   <TextInput
                     style={styles.input}
-                    placeholder={'Company'}
+                    placeholder={'Company *'}
                     onChangeText={handleChange('companyName')}
                     value={values.companyName}
                   />
@@ -164,6 +168,13 @@ const Jobs = () => {
                     placeholder={'Job Title'}
                     onChangeText={handleChange('jobTitle')}
                     value={values.jobTitle}
+                  />
+
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Job Post URL *'}
+                    onChangeText={handleChange('jobPostURL')}
+                    value={values.jobPostURL}
                   />
 
                   <TextInput
