@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   description: {
+    flex: 2,
     marginTop: 15,
     textAlign: 'center',
   },
@@ -38,11 +39,24 @@ const styles = StyleSheet.create({
   },
   cards: {
     flex: 1,
+    flexDirection: 'column',
     padding: 20,
     marginTop: 10,
-    maxWidth: '90%',
+    maxWidth: '80%',
     elevation: 8,
-  }
+  },
+  button: {
+    // width: 200,
+  },
+  left: {
+    flex: 6,
+    justifyContent: 'flex-end',
+    alignSelf: 'stretch',
+  },
+  right: {
+    flex: 1,
+    alignSelf: 'flex-end',
+  },
 });
 
 
@@ -119,18 +133,20 @@ const Bookmarks = (props) => {
     return (
       <View style={styles.basic}>
         <Card style={styles.cards}>
-          <TouchableOpacity
+          <TouchableOpacity style={styles.left}
             keyExtractor={(item) => item.id}
             item={item}>
             <Button
-              mode="contained" onPress={handleClick}>
+              style={styles.button}
+              mode="contained" 
+              onPress={handleClick}>
               {item.values.name}
             </Button>
           </TouchableOpacity>
           <Text style={styles.description}>
             {item.values.description}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity style={styles.right}>
               <IconButton
                 icon="delete"
                 size={20}
@@ -210,7 +226,7 @@ const Bookmarks = (props) => {
       <Stack.Navigator>
 
         <Stack.Screen
-          name='Bookmarks'
+          name='Add a new Bookmark'
           component={Bookmark} />
 
 

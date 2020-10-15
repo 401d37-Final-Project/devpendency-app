@@ -25,10 +25,10 @@ React Native
 
 ## Original Wireframes
 
-![wireframe1](Assets/wireframe1.png)
-![wireframe2](Assets/wireframe2.png)
-![wireframe3](Assets/wireframe3.png)
+![wireframe1](Assets/images/wireframe1.png)
+![wireframe2](Assets/images/wireframe2.png)
+![wireframe3](Assets/images/wireframe3.png)
 
 ## UML
 
-![domain-model](Assets/uml.png)
+![domain-model](Assets/images/uml.png)
