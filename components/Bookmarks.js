@@ -36,18 +36,20 @@ const styles = StyleSheet.create({
   },
   cards: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'column',
     padding: 20,
     marginTop: 10,
     maxWidth: '80%',
     elevation: 8,
   },
-  button: {
-    // width: 200,
-  },
+  // button: {
+  //   alignSelf: 'stretch'
+  // },
   left: {
     flex: 6,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignSelf: 'stretch',
   },
   right: {
@@ -89,11 +91,8 @@ const Bookmarks = (props) => {
 
   const Bookmark = () => {
 
-
     const [bookmark, setBookmarks] = useState([]);
     const bookmarkList = bookmark;
-    console.log('Bookmark List', bookmarkList)
-
 
     useEffect(() => {
       const fetchData = async () => {
@@ -117,7 +116,6 @@ const Bookmarks = (props) => {
       setBookmarks(newList);
       setObjValue(newList);
     }
-
 
     const renderItem = ({ item }) => {
 
@@ -186,19 +184,19 @@ const Bookmarks = (props) => {
 
                   <TextInput
                     style={styles.input}
-                    placeholder={'Bookmark URL'}
+                    placeholder={'Bookmark URL*'}
                     value={values.url}
                     onChangeText={handleChange('url')} />
 
                   <TextInput
                     style={styles.input}
-                    placeholder={'Bookmark Name'}
+                    placeholder={'Bookmark Name*'}
                     value={values.name}
                     onChangeText={handleChange('name')} />
 
                   <TextInput
                     style={styles.input}
-                    placeholder={'Bookmark Description'}
+                    placeholder={'Bookmark Description*'}
                     value={values.description}
                     onChangeText={handleChange('description')} />
                   <Button
