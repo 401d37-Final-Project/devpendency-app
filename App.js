@@ -82,8 +82,12 @@ export default function App() {
             },
           })}
           tabBarOptions={{
-            activeTintColor: '#F9665E',
-            inactiveTintColor: '#000',
+            activeTintColor: '#EEF1E6',
+            inactiveTintColor: '#414A4E',
+            style: {
+              paddingVertical: 5,
+              backgroundColor: '#F9665E',
+            }
           }}
         >
           <Tab.Screen

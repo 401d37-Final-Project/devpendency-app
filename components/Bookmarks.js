@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   button: {
-    // width: 200,
   },
   left: {
     flex: 6,
@@ -139,7 +138,7 @@ const Bookmarks = (props) => {
             item={item}>
             <Button
               style={styles.button}
-              mode="contained" 
+              mode="outlined" 
               onPress={handleClick}>
               {item.values.name}
             </Button>
@@ -202,6 +201,7 @@ const Bookmarks = (props) => {
                 value={values.description}
                 onChangeText={handleChange('description')} />
               <Button
+                style={styles.button}
                 mode="contained"
                 onPress={handleSubmit}
                 >
