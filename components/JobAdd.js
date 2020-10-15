@@ -9,6 +9,7 @@ import { Title, Button, IconButton, Paragraph, Text, Card, DefaultTheme, Provide
 
 
 import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 const Stack = createStackNavigator();
 
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   delete: {
-    flex: 0,
+    flex: 1,
     alignItems: 'flex-end',
   },
 });
@@ -65,7 +66,7 @@ const Jobs = () => {
 
   const JobDeets = ({ navigation }) => {
 
-    const activeJob = job.filter(job => job.values.jobID === activeJobForDetails.current)
+    const activeJob = job.filter(job => job.values.jobPostURL === activeJobForDetails.current)
 
     return (
       <View style={styles.basic}>
@@ -73,6 +74,7 @@ const Jobs = () => {
           <Text>{activeJob[0].values.companyName}</Text>
           <Text>{activeJob[0].values.jobTitle}</Text>
           <Text>{activeJob[0].values.jobID}</Text>
+          <Text>{activeJob[0].values.jobPostURL}</Text>
           <Text>{activeJob[0].values.dateApplied}</Text>
           <Text>{activeJob[0].values.addtlNotes}</Text>
           <IconButton
@@ -91,7 +93,7 @@ const Jobs = () => {
     const deleteItem = async (id) => {
 
       const newJobList = await job.filter(item => {
-        if (item.values.jobID !== id)
+        if (item.values.jobPostURL !== id)
           return item;
       })
       setJob(newJobList)
@@ -103,7 +105,7 @@ const Jobs = () => {
 
       function handleJobDeetsPress() {
         navigation.navigate('Back to Job List');
-        activeJobForDetails.current = item.values.jobID;
+        activeJobForDetails.current = item.values.jobPostURL;
       }
 
 
@@ -132,7 +134,7 @@ const Jobs = () => {
                 style={styles.delete}
                 title='Delete'
                 icon='delete'
-                onPress={() => deleteItem(item.values.jobID)} />
+                onPress={() => deleteItem(item.values.jobPostURL)} />
 
               </TouchableOpacity>
 
@@ -154,10 +156,18 @@ const Jobs = () => {
               initialValues={{
                 companyName: '',
                 jobTitle: '',
+                jobPostURL: '',
                 jobID: '',
                 dateApplied: '',
                 addtlNotes: '',
               }}
+
+              validationSchema={Yup.object().shape({
+                companyName: Yup.string().required('Company name is required'),
+                jobPostURL: Yup.string().required('Job post URL is required'),
+              })}
+
+              validateOnMount
 
               onSubmit={(values, { resetForm }) => {
 
@@ -172,7 +182,7 @@ const Jobs = () => {
                   {/* <Text>Company</Text> */}
                   <TextInput
                     style={styles.input}
-                    placeholder={'Company'}
+                    placeholder={'Company *'}
                     onChangeText={handleChange('companyName')}
                     value={values.companyName}
                   />
@@ -187,7 +197,14 @@ const Jobs = () => {
 
                   <TextInput
                     style={styles.input}
-                    placeholder={'Job ID (required)'}
+                    placeholder={'Job Post URL *'}
+                    onChangeText={handleChange('jobPostURL')}
+                    value={values.jobPostURL}
+                  />
+
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Job ID (if applicable)'}
                     onChangeText={handleChange('jobID')}
                     value={values.jobID}
                   />
