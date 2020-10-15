@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, View, TextInput, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 import { Title, Button, IconButton, Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -57,14 +58,65 @@ const styles = StyleSheet.create({
   },
 });
 
+// placing form submission into local storage, if already there merge it if not add it
+const setObjValue = async (job) => {
+
+
+  let merged;
+
+  try {
+    merged = await AsyncStorage.mergeItem('Jobs', JSON.stringify(job))
+  } catch(e) {
+    console.log('error:', e)
+  }
+
+  if(!merged) {
+
+    try {
+      merged = await AsyncStorage.setItem('Jobs', JSON.stringify(job))
+    } catch(e) {
+      console.log('error:', e)
+    }
+  }
+}
+
+// calling things from local storage
+
+const getObj = async () => {
+
+  try {
+    const jsonValue = await AsyncStorage.getItem('Jobs');
+
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    console.log('error:', e)
+  }
+}
+
+
+
+
+
+
+
 const Jobs = () => {
+
+
+
+
 
   const [job, setJob] = useState([]);
 
   const activeJobForDetails = useRef('')
 
 
+  function setJobWrapper(value) {
+    return setJob(value)
+  }
+
   const JobDeets = ({ navigation }) => {
+
+    
 
     const activeJob = job.filter(job => job.values.jobPostURL === activeJobForDetails.current)
 
@@ -88,7 +140,24 @@ const Jobs = () => {
   };
 
 
+  const fetchData = async () => {
+
+    const list = await getObj();
+
+    if(list) {
+      console.log('job list in useEffect:', list)
+      setJobWrapper(list);
+      return;
+    } else {
+      return Promise.resolve();
+    }
+  }
+
+  fetchData();
+
   const JobTrackHomeScreen = ({ navigation }) => {
+
+
 
     const deleteItem = async (id) => {
 
@@ -96,7 +165,8 @@ const Jobs = () => {
         if (item.values.jobPostURL !== id)
           return item;
       })
-      setJob(newJobList)
+      setJobWrapper(newJobList)
+      setObjValue(newJobList)
     }
 
 
@@ -171,15 +241,17 @@ const Jobs = () => {
 
               onSubmit={(values, { resetForm }) => {
 
-                setJob([...job, { values }]);
+                const newJobs = [...job, { values }];
+
+                setJobWrapper(newJobs)
                 resetForm({ values: '' })
+                setObjValue(newJobs)
 
               }}>
 
               {({ handleChange, handleSubmit, values }) => (
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                  {/* <Text style={styles.heading} >Add a Job Application</Text> */}
-                  {/* <Text>Company</Text> */}
+           
                   <TextInput
                     style={styles.input}
                     placeholder={'Company *'}
