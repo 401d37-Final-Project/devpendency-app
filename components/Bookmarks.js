@@ -130,9 +130,6 @@ const Bookmarks = (props) => {
           <Text style={styles.description}>
             {item.values.description}
           </Text>
-          <Text style={styles.delete}>
-            Delete
-          </Text>
           <TouchableOpacity>
               <IconButton
                 icon="delete"

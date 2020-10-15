@@ -211,10 +211,7 @@ export default function Sketch() {
       </View>
 
     </>
-
     )
-
-
   }
 
 
