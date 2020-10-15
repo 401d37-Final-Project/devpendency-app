@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { Animated, Dimensions, View, StyleSheet, PanResponder, Button, TouchableOpacity } from 'react-native';
-import { Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import React, { useRef, useState, useEffect } from 'react';
+import { Animated, Dimensions, View, StyleSheet, PanResponder, Button, TouchableOpacity, FlatList } from 'react-native';
+import { Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider, IconButton } from 'react-native-paper';
 import Svg, { Polyline } from 'react-native-svg';
 import {Picker} from '@react-native-community/picker';
 import AsyncStorage from '@react-native-community/async-storage'
@@ -76,7 +76,7 @@ const getObj = async () => {
 export default function Sketch() {
 
 
-  const Sketch = () => {
+  const Sketch = ({ navigation }) => {
 
     let pathRef = useRef([[]]).current;
     const [path, setPath] = useState(examplePath);
@@ -188,10 +188,7 @@ export default function Sketch() {
         </TouchableOpacity>
         <TouchableOpacity
         style={{ height: 50, width: 50 }}
-          onPress={async () => {
-            console.log('savedDrawings', await getObj())
-            // console.log('savedTest', testStorageGet())
-          }}
+          onPress={() => navigation.navigate('Saved Napkins')}
         >
           <Text style={{ lineHeight: 50, textAlign: 'center' }}>Get</Text>
         </TouchableOpacity>
@@ -199,8 +196,9 @@ export default function Sketch() {
 
       <View style={styles.container} {...panResponder.panHandlers}>
         <Svg height="100%" width="100%" viewBox={`0 0 ${width} ${height}`}>
-          {uberPoints.map((points) => (
+          {uberPoints.map((points, index) => (
             <Polyline
+              key={index}
               points={points}
               fill="none"
               stroke={color}
@@ -215,14 +213,98 @@ export default function Sketch() {
   }
 
 
+    const savedNapkinRef = useRef('')
+  
+      const ViewDrawing = () => {
+  
+        return (
+          <Text>IN VIEW DRAWING</Text>
+        )
+  
+      }
+  
+  const SavedNapkins =  ({navigation}) => {
+
+    const [ savedNapkins, setSavedNapkins ] = useState([])
+
+
+
+    useEffect(() => {
+
+      const getSavedObj = async () => {
+
+        const list = await getObj();
+
+        setSavedNapkins(list)
+
+      }
+  
+      getSavedObj();
+     
+
+    }, [])
+    
+
+    const napkinArr = Object.entries(savedNapkins);
+
+
+    const renderItem = ({ item }) => {
+
+
+      function renderDrawing(coords) {
+        navigation.navigate('View Drawing');
+        savedNapkinRef.current = coords;
+      }
+
+
+      return (
+
+        <Card>
+
+          <Text>{item[0]}</Text>
+          <IconButton 
+            title='View'
+            icon='arrow-expand'
+            onPress={() => renderDrawing(item[1])}/>
+
+        </Card>
+
+
+
+      )
+    }
+
+    
+    return (
+      <>
+      <Text>Made it!</Text>
+
+      <FlatList
+      keyExtractor={(value, index) => index.toString()}
+      data={napkinArr}
+      renderItem={renderItem}
+       />
+      </>
+    )
+  }
+
+
 
   return (
     <>
     <Stack.Navigator>
 
       <Stack.Screen 
-        name='Dev Napkin Sketch'
+        name='Dev Napkin'
         component={Sketch} />
+
+      <Stack.Screen 
+        name='Saved Napkins'
+        component={SavedNapkins} />
+
+      <Stack.Screen 
+        name='View Drawing'
+        component={ViewDrawing} />
 
     </Stack.Navigator>
     </>

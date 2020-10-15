@@ -2,9 +2,10 @@ import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, SafeAreaView, ScrollView, StatusBar, FlatList, Container, TextInput, View, Linking, TouchableOpacity } from 'react-native';
-import { useFormik, Formik, Field, Form } from 'formik';
+import { useFormik, Formik, Field, Form, yupToFormErrors } from 'formik';
 import { Button, Text, Card, IconButton, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
+import * as Yup from 'yup';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   description: {
+    flex: 2,
     marginTop: 15,
     textAlign: 'center',
   },
@@ -34,11 +36,24 @@ const styles = StyleSheet.create({
   },
   cards: {
     flex: 1,
+    flexDirection: 'column',
     padding: 20,
     marginTop: 10,
-    maxWidth: '90%',
+    maxWidth: '80%',
     elevation: 8,
-  }
+  },
+  button: {
+    // width: 200,
+  },
+  left: {
+    flex: 6,
+    justifyContent: 'flex-end',
+    alignSelf: 'stretch',
+  },
+  right: {
+    flex: 1,
+    alignSelf: 'flex-end',
+  },
 });
 
 
@@ -110,23 +125,23 @@ const Bookmarks = (props) => {
         Linking.openURL(`${item.values.url}`);
       }
 
-
-
       return (
         <View style={styles.basic}>
           <Card style={styles.cards}>
-            <TouchableOpacity
+            <TouchableOpacity style={styles.left}
               keyExtractor={(item) => item.id}
               item={item}>
               <Button
-                mode="contained" onPress={handleClick}>
+                style={styles.button}
+                mode="contained"
+                onPress={handleClick}>
                 {item.values.name}
               </Button>
             </TouchableOpacity>
             <Text style={styles.description}>
               {item.values.description}
             </Text>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.right}>
               <IconButton
                 icon="delete"
                 size={20}
@@ -146,6 +161,15 @@ const Bookmarks = (props) => {
                 url: '',
                 description: ''
               }}
+              validationSchema={Yup.object().shape({
+                url: Yup.string()
+                  .required('URL is required'),
+                name: Yup.string()
+                  .required('Name is required'),
+                description: Yup.string()
+                  .required('Description is required')
+              })}
+              validateOnMount
               onSubmit={(values, { resetForm }) => {
                 console.log('submitted', values)
                 const newBookmarks = [...bookmark, { values }]
@@ -182,7 +206,7 @@ const Bookmarks = (props) => {
                     onPress={handleSubmit}
                   >
                     Submit
-            </Button>
+                  </Button>
                 </View>
 
               )}
@@ -205,7 +229,7 @@ const Bookmarks = (props) => {
     <>
       <Stack.Navigator>
         <Stack.Screen
-          name='Bookmarks'
+          name='Add a new Bookmark'
           component={Bookmark} />
       </Stack.Navigator>
     </>
