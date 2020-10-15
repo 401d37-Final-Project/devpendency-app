@@ -2,7 +2,6 @@ import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, SafeAreaView, ScrollView, StatusBar, FlatList, Container, TextInput, View, Linking, TouchableOpacity } from 'react-native';
-import { ListItem, Paragraph, Icon } from 'react-native-elements';
 import { useFormik, Formik, Field, Form } from 'formik';
 import { Button, Text, Card, IconButton, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -17,9 +16,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 275,
   },
-  // baseText: {
-  //   fontFamily: "Cochin",
-  // },
   heading: {
     textAlign: 'center',
     marginBottom: 15,
@@ -115,91 +111,91 @@ const Bookmarks = (props) => {
       }
 
 
-     
-    return (
-      <View style={styles.basic}>
-        <Card style={styles.cards}>
-          <TouchableOpacity
-            keyExtractor={(item) => item.id}
-            item={item}>
-            <Button
-              mode="contained" onPress={handleClick}>
-              {item.values.name}
-            </Button>
-          </TouchableOpacity>
-          <Text style={styles.description}>
-            {item.values.description}
-          </Text>
-          <TouchableOpacity>
+
+      return (
+        <View style={styles.basic}>
+          <Card style={styles.cards}>
+            <TouchableOpacity
+              keyExtractor={(item) => item.id}
+              item={item}>
+              <Button
+                mode="contained" onPress={handleClick}>
+                {item.values.name}
+              </Button>
+            </TouchableOpacity>
+            <Text style={styles.description}>
+              {item.values.description}
+            </Text>
+            <TouchableOpacity>
               <IconButton
                 icon="delete"
                 size={20}
                 onPress={() => deleteItem(item.values.url)} />
-          </TouchableOpacity>
-        </Card>
-      </View>
-    )
-  }
-  return (
-    <>
-      <View style={styles.basic}>
-      <Card style={styles.cards}>
-        <Formik
-          initialValues={{
-            name: '',
-            url: '',
-            description: ''
-          }}
-          onSubmit={(values, { resetForm }) => {
-            console.log('submitted', values)
-            const newBookmarks = [...bookmark, { values }]
-            setBookmarks(newBookmarks);
-            resetForm({ values: '' })
-            setObjValue(newBookmarks)
-          }
+            </TouchableOpacity>
+          </Card>
+        </View>
+      )
+    }
+    return (
+      <>
+        <View style={styles.basic}>
+          <Card style={styles.cards}>
+            <Formik
+              initialValues={{
+                name: '',
+                url: '',
+                description: ''
+              }}
+              onSubmit={(values, { resetForm }) => {
+                console.log('submitted', values)
+                const newBookmarks = [...bookmark, { values }]
+                setBookmarks(newBookmarks);
+                resetForm({ values: '' })
+                setObjValue(newBookmarks)
+              }
 
-          }>
+              }>
 
-          {({ handleChange, handleSubmit, values }) => (
+              {({ handleChange, handleSubmit, values }) => (
 
-            <View style={{justifyContent: 'center', alignItems: 'center'}}>
-   
-              <TextInput
-                style={styles.input}
-                placeholder={'Bookmark URL'}
-                value={values.url}
-                onChangeText={handleChange('url')} />
-      
-              <TextInput
-                style={styles.input}
-                placeholder={'Bookmark Name'}
-                value={values.name}
-                onChangeText={handleChange('name')} />
-          
-              <TextInput
-                style={styles.input}
-                placeholder={'Bookmark Description'}
-                value={values.description}
-                onChangeText={handleChange('description')} />
-              <Button
-                mode="contained"
-                onPress={handleSubmit}
-                >
-                Submit
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Bookmark URL'}
+                    value={values.url}
+                    onChangeText={handleChange('url')} />
+
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Bookmark Name'}
+                    value={values.name}
+                    onChangeText={handleChange('name')} />
+
+                  <TextInput
+                    style={styles.input}
+                    placeholder={'Bookmark Description'}
+                    value={values.description}
+                    onChangeText={handleChange('description')} />
+                  <Button
+                    mode="contained"
+                    onPress={handleSubmit}
+                  >
+                    Submit
             </Button>
-            </View>
+                </View>
 
-          )}
-        </Formik>
-      </Card>
-      </View>
+              )}
+            </Formik>
+          </Card>
+        </View>
 
-      <FlatList
-        style={{ marginVertical: 10 }}
-        data={bookmarkList}
-        keyExtractor={(value, index) => index.toString()}
-        renderItem={renderItem}
-      />
+        <FlatList
+          style={{ marginVertical: 10 }}
+          data={bookmarkList}
+          keyExtractor={(value, index) => index.toString()}
+          renderItem={renderItem}
+        />
 
       </>
     );
@@ -208,12 +204,9 @@ const Bookmarks = (props) => {
   return (
     <>
       <Stack.Navigator>
-
         <Stack.Screen
           name='Bookmarks'
           component={Bookmark} />
-
-
       </Stack.Navigator>
     </>
   );
