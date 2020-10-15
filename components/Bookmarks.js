@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
     maxWidth: '80%',
     elevation: 8,
   },
-  // button: {
-  //   alignSelf: 'stretch'
-  // },
+
+  },
   left: {
     flex: 6,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+
     alignSelf: 'stretch',
   },
   right: {
@@ -123,23 +123,24 @@ const Bookmarks = (props) => {
         Linking.openURL(`${item.values.url}`);
       }
 
-      return (
-        <View style={styles.basic}>
-          <Card style={styles.cards}>
-            <TouchableOpacity style={styles.left}
-              keyExtractor={(item) => item.id}
-              item={item}>
-              <Button
-                style={styles.button}
-                mode="contained"
-                onPress={handleClick}>
-                {item.values.name}
-              </Button>
-            </TouchableOpacity>
-            <Text style={styles.description}>
-              {item.values.description}
-            </Text>
-            <TouchableOpacity style={styles.right}>
+    return (
+      <View style={styles.basic}>
+        <Card style={styles.cards}>
+          <TouchableOpacity style={styles.left}
+            keyExtractor={(item) => item.id}
+            item={item}>
+            <Button
+              style={styles.button}
+              mode="contained" 
+              onPress={handleClick}>
+              {item.values.name}
+            </Button>
+          </TouchableOpacity>
+          <Text style={styles.description}>
+            {item.values.description}
+          </Text>
+          <TouchableOpacity style={styles.right}>
+
               <IconButton
                 icon="delete"
                 size={20}
