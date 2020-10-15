@@ -13,9 +13,10 @@ const styles = StyleSheet.create({
   input: {
     margin: 15,
     paddingLeft: 10,
-    borderColor: 'black',
+    borderColor: '#A2A2A2',
     borderWidth: 1,
     width: 275,
+    color: '#EEF1E6'
   },
   heading: {
     textAlign: 'center',
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     maxWidth: '80%',
     elevation: 8,
   },
-
+  button: {
   },
   left: {
     flex: 6,
@@ -131,7 +132,7 @@ const Bookmarks = (props) => {
             item={item}>
             <Button
               style={styles.button}
-              mode="contained" 
+              mode="outlined" 
               onPress={handleClick}>
               {item.values.name}
             </Button>
@@ -145,6 +146,7 @@ const Bookmarks = (props) => {
                 icon="delete"
                 size={20}
                 onPress={() => deleteItem(item.values.url)} />
+
             </TouchableOpacity>
           </Card>
         </View>
@@ -186,21 +188,25 @@ const Bookmarks = (props) => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Bookmark URL*'}
+                    placeholderTextColor={'#A2A2A2'}
                     value={values.url}
                     onChangeText={handleChange('url')} />
 
                   <TextInput
                     style={styles.input}
                     placeholder={'Bookmark Name*'}
+                    placeholderTextColor={'#A2A2A2'}
                     value={values.name}
                     onChangeText={handleChange('name')} />
 
                   <TextInput
                     style={styles.input}
                     placeholder={'Bookmark Description*'}
+                    placeholderTextColor={'#A2A2A2'}
                     value={values.description}
                     onChangeText={handleChange('description')} />
                   <Button
+                    style={styles.button}
                     mode="contained"
                     onPress={handleSubmit}
                   >
@@ -238,10 +244,4 @@ const Bookmarks = (props) => {
 
 
 export default Bookmarks;
-
-
-
-
-
-
 

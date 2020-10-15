@@ -62,7 +62,7 @@ const peopleObjects = [
     name: 'Tia', 
     subtitle: 'Software Developer',
     content: 'Card content 2',
-    uri: 'https://picsum.photos/700',
+    uri: require('../assets/images/tia.jpg'),
     githubURL: 'https://www.linkedin.com/in/tia-low',
     linkedinURL: 'url for linkedin 2'
   }, 
@@ -79,7 +79,7 @@ const peopleObjects = [
     id: 4,
     name: 'Stephen', 
     subtitle: 'Software Developer',
-    content: 'Card content 4',
+    content: 'Steve is a music obsessed full stack software developer from Seattle. If he’s not performing, discovering, or discussing music, he’s likely either asleep or in the mountains.',
     uri: require('../assets/images/steve.png'),
     githubURL: 'https://github.com/SBALDOCK',
     linkedinURL: 'url for linkedin 4'

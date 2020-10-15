@@ -16,9 +16,10 @@ const styles = StyleSheet.create({
   input: {
     margin: 15,
     paddingLeft: 10,
-    borderColor: 'black',
+    borderColor: '#A2A2A2',
     borderWidth: 1,
     width: 275,
+    color: '#EEF1E6'
   },
   jobButton: {
     flex: 1,
@@ -37,7 +38,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     marginTop: 20,
-
     maxWidth: '80%',
     elevation: 8,
   },
@@ -173,6 +173,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Company'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('companyName')}
                     value={values.companyName}
                   />
@@ -181,6 +182,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Job Title'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('jobTitle')}
                     value={values.jobTitle}
                   />
@@ -188,6 +190,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Job ID (required)'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('jobID')}
                     value={values.jobID}
                   />
@@ -195,6 +198,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Date Applied'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('dateApplied')}
                     value={values.dateApplied}
                   />
@@ -202,6 +206,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Any Additional Notes'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('addtlNotes')}
                     value={values.addtlNotes}
                     multiline={true}

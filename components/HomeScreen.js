@@ -60,7 +60,7 @@ const HomeScreen = () => {
           <Ionicons
             name={'md-brush'}
             size={80}
-            color={'black'}
+            color={'white'}
             style={styles.heroIcon}/>
             <Paragraph style={styles.text}>Quick idea for your next app? Sketch it out on the Dev Napkin and save it for future reference.</Paragraph>
         </Card>
@@ -73,7 +73,7 @@ const HomeScreen = () => {
           <Ionicons
             name={'md-book'}
             size={80}
-            color={'black'}
+            color={'white'}
             style={styles.heroIcon}/>
           <Paragraph style={styles.text}>Need to keep track of all your resources? Save them here and link directly to the browser. </Paragraph>
         </Card>
@@ -83,7 +83,7 @@ const HomeScreen = () => {
           <Ionicons
             name={'md-document'}
             size={80}
-            color={'black'}
+            color={'white'}
             style={styles.heroIcon}/>
           <Paragraph style={styles.text}>A Dev is always on the lookout for new opportunities! Track your job app's here. </Paragraph>
         </Card>
