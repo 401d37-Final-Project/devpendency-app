@@ -1,11 +1,11 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
-// import { NavigationContainer } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, SafeAreaView, ScrollView, StatusBar, FlatList, Container, TextInput, View, Linking, TouchableOpacity } from 'react-native';
 import { ListItem, Paragraph, Icon } from 'react-native-elements';
 import { useFormik, Formik, Field, Form } from 'formik';
-import { Button, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Button, Text, Card, IconButton, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Stack = createStackNavigator();
 
@@ -45,32 +45,77 @@ const styles = StyleSheet.create({
   }
 });
 
-// const theme = {
-//   ...DefaultTheme,
-//   dark: true,
-//   roundness: 5,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#F9665E',
-//     accent: '#EEF1E6',
-//     background: '#2E373E',
-//     text: '#fff',
-//     surface: '#A2A2A2'
-//   },
-// };
+
+
+const setObjValue = async (bookmark) => {
+
+  let merged
+  try {
+    merged = await AsyncStorage.mergeItem('Bookmarks', JSON.stringify(bookmark));
+  } catch (e) {
+    console.log(e)
+  }
+
+  if (!merged) {
+    try {
+      merged = await AsyncStorage.setItem('Bookmarks', JSON.stringify(bookmark));
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
+
+const getObj = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('Bookmarks')
+    return jsonValue != null ? JSON.parse(jsonValue) : null
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 const Bookmarks = (props) => {
 
   const Bookmark = () => {
 
+
     const [bookmark, setBookmarks] = useState([]);
     const bookmarkList = bookmark;
+    console.log('Bookmark List', bookmarkList)
 
-  const renderItem = ({ item }) => {
 
-    const handleClick = () => {
-      Linking.openURL(`${item.values.url}`);
+    useEffect(() => {
+      const fetchData = async () => {
+        const list = await getObj();
+        if (list) {
+          console.log(list)
+          setBookmarks(list);
+        } else {
+          return Promise.resolve();
+        }
+      }
+      fetchData();
+    }, [])
+
+    const deleteItem = async (url) => {
+
+      const newList = await bookmarkList.filter(item => {
+        if (item.values.url !== url)
+          return item;
+      })
+      setBookmarks(newList);
+      setObjValue(newList);
     }
+
+
+    const renderItem = ({ item }) => {
+
+      const handleClick = () => {
+        Linking.openURL(`${item.values.url}`);
+      }
+
+
+     
     return (
       <View style={styles.basic}>
         <Card style={styles.cards}>
@@ -88,6 +133,12 @@ const Bookmarks = (props) => {
           <Text style={styles.delete}>
             Delete
           </Text>
+          <TouchableOpacity>
+              <IconButton
+                icon="delete"
+                size={20}
+                onPress={() => deleteItem(item.values.url)} />
+          </TouchableOpacity>
         </Card>
       </View>
     )
@@ -104,8 +155,10 @@ const Bookmarks = (props) => {
           }}
           onSubmit={(values, { resetForm }) => {
             console.log('submitted', values)
-            setBookmarks([...bookmark, { values }]);
+            const newBookmarks = [...bookmark, { values }]
+            setBookmarks(newBookmarks);
             resetForm({ values: '' })
+            setObjValue(newBookmarks)
           }
 
           }>
@@ -146,38 +199,34 @@ const Bookmarks = (props) => {
 
       <FlatList
         style={{ marginVertical: 10 }}
-        data={bookmarkList.sort((a, b) => a.name - b.name)}
+        data={bookmarkList}
         keyExtractor={(value, index) => index.toString()}
         renderItem={renderItem}
       />
 
-    </>
-  );
+      </>
+    );
   }
 
   return (
     <>
-    <Stack.Navigator>
+      <Stack.Navigator>
 
-      <Stack.Screen 
-        name='Add a New Bookmark'
-        component={Bookmark} />
+        <Stack.Screen
+          name='Bookmarks'
+          component={Bookmark} />
 
-    </Stack.Navigator>
+
+      </Stack.Navigator>
     </>
   );
+}
 
-};
 
 
 export default Bookmarks;
 
 
-// alphabetize results
-// add a delete button
-// style the page
-// nav on the bottom of the screen at all times
-// 
 
 
 
