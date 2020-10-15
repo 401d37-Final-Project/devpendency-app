@@ -44,7 +44,7 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 
     expo start 
 
-*If you have Expo client installed on your phone, scan the QR code and enjoy! Alternatively you can run the app in an emulator. You can view the app in a web browser, although we do not recommend as it is not indicative of viewing as intended on a mobile device.*
+*If you have Expo client installed on your phone, **scan the QR code** and enjoy! Alternatively you can run the app in an emulator. You can view the app in a web browser, although we do not recommend as it is not indicative of viewing as intended on a mobile device.*
 
 ## Usage
 
@@ -69,9 +69,10 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 ### Contribution Guidelines
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 <br/>
-   *Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. Please contact [Tia Low](mailto:lowtia@gmail.com) to report any violations.*
-   <br/>
-   [Guidelines](CONTRIBUTIONS.md)
+[Guidelines](CONTRIBUTIONS.md)
+<br/>
+   *Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. Please contact any of the lead developers to report any violations: [Tia Low](mailto:lowtia@gmail.com), [Steve Baldock](stephenbaldock78@gmail.com), [Matt Herriges](herrigesmt@gmail.com), [Blake Romero](blakeromero001@gmail.com).*
+   
 
 ## Software Requirements
 
