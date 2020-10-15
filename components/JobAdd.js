@@ -194,6 +194,7 @@ const Jobs = () => {
                   <TextInput
                     style={styles.input}
                     placeholder={'Job Post URL *'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('jobPostURL')}
                     value={values.jobPostURL}
                   />

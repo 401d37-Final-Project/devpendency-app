@@ -52,8 +52,8 @@ const peopleObjects = [
     id: 1,
     name: 'Blake', 
     subtitle: 'Software Developer',
-    content: 'Card content 1',
-    uri: 'https://picsum.photos/700',
+    content: 'Blake is a huge nerd for learning new technologies, a true jack of all trades. A veteran of the U.S. Army and experienced in international collaboration he always strives to create a better quality of life for everyone around him.',
+    uri: require('../assets/images/blake.jpg'),
     githubURL: 'https://github.com/blakerom',
     linkedinURL: 'https://www.linkedin.com/in/blakeromero'
   },
@@ -64,7 +64,7 @@ const peopleObjects = [
     content: 'Card content 2',
     uri: require('../assets/images/tia.jpg'),
     githubURL: 'https://www.linkedin.com/in/tia-low',
-    linkedinURL: 'url for linkedin 2'
+    linkedinURL: 'https://www.linkedin.com/in/tia-low/'
   }, 
   {
     id: 3,
@@ -73,7 +73,7 @@ const peopleObjects = [
     content: 'Card content 3',
     uri: 'https://picsum.photos/700',
     githubURL: 'https://github.com/herrigesmt',
-    linkedinURL: 'url for linkedin 3'
+    linkedinURL: 'https://www.linkedin.com/in/herrigesmt'
   }, 
   {
     id: 4,
@@ -82,7 +82,7 @@ const peopleObjects = [
     content: 'Steve is a music obsessed full stack software developer from Seattle. If he’s not performing, discovering, or discussing music, he’s likely either asleep or in the mountains.',
     uri: require('../assets/images/steve.png'),
     githubURL: 'https://github.com/SBALDOCK',
-    linkedinURL: 'url for linkedin 4'
+    linkedinURL: 'https://www.linkedin.com/in/stephentbaldock/'
   }
 ];
 
