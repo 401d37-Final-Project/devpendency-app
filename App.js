@@ -40,7 +40,7 @@ const theme = {
     accent: '#EEF1E6',
     background: '#2E373E',
     text: '#fff',
-    surface: '#A2A2A2'
+    surface: '#414A4E'
   },
   // fonts: configureFonts(fontConfig),
 };

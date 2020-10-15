@@ -62,7 +62,7 @@ const peopleObjects = [
     name: 'Tia', 
     subtitle: 'Software Developer',
     content: 'Card content 2',
-    uri: 'https://picsum.photos/700',
+    uri: require('../assets/images/tia.jpg'),
     githubURL: 'https://www.linkedin.com/in/tia-low',
     linkedinURL: 'url for linkedin 2'
   }, 

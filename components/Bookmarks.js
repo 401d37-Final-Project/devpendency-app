@@ -13,9 +13,10 @@ const styles = StyleSheet.create({
   input: {
     margin: 15,
     paddingLeft: 10,
-    borderColor: 'black',
+    borderColor: '#A2A2A2',
     borderWidth: 1,
     width: 275,
+    color: '#EEF1E6'
   },
   // baseText: {
   //   fontFamily: "Cochin",
@@ -183,18 +184,21 @@ const Bookmarks = (props) => {
               <TextInput
                 style={styles.input}
                 placeholder={'Bookmark URL'}
+                placeholderTextColor={'#A2A2A2'}
                 value={values.url}
                 onChangeText={handleChange('url')} />
       
               <TextInput
                 style={styles.input}
                 placeholder={'Bookmark Name'}
+                placeholderTextColor={'#A2A2A2'}
                 value={values.name}
                 onChangeText={handleChange('name')} />
           
               <TextInput
                 style={styles.input}
                 placeholder={'Bookmark Description'}
+                placeholderTextColor={'#A2A2A2'}
                 value={values.description}
                 onChangeText={handleChange('description')} />
               <Button
