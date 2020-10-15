@@ -54,6 +54,9 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
   - *Bookmark links must contain entire url, for example:* **https://github.com/**
 - Complete form fields to save a job you'd like to track. Saved collection will be a list with quick reference fields. Use the icons to delete a job from the list or expand on an individual job to see more details. Simple navigation back from there to your saved list of all jobs. 
 
+## Tests
+
+(ツ)_/¯
 
 ## Software Requirements
 
@@ -71,7 +74,7 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 
 ## Resources 
 
-**ANYTHING TO INCLUDE HERE? RESOURCES?**
+**RESOURCES OR LINKS TO INCLUDE HERE?**
 
 - Sean Murray for some assistance with storage persistense [LinkedIn](https://www.linkedin.com/in/sean-j-murray/) || [GitHub](https://github.com/seanjmurray)
 - JB?
