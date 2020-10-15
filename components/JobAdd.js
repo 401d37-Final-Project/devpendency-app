@@ -2,10 +2,9 @@ import 'react-native-gesture-handler';
 import React, { useState, useRef } from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { StyleSheet, View, TextInput, FlatList, TouchableOpacity, StatusBar } from 'react-native';
-import { Title, Button, IconButton, Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { StyleSheet, View, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import { Button, IconButton, Title, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 
 import { Formik } from 'formik';
@@ -66,16 +65,24 @@ const Jobs = () => {
 
   const JobDeets = ({ navigation }) => {
 
-    const activeJob = job.filter(job => job.values.jobID === activeJobForDetails.current)
+    const activeJob = job.filter(job => job.values.jobPostURL === activeJobForDetails.current)
 
     return (
       <View style={styles.basic}>
         <Card style={styles.cards}>
+          <Title>Company: </Title>
           <Text>{activeJob[0].values.companyName}</Text>
+
+          {activeJob[0].values.jobTitle != '' && <Title>Job Title: </Title>}
           <Text>{activeJob[0].values.jobTitle}</Text>
+
+          <Title>URL or ID: </Title>
           <Text>{activeJob[0].values.jobPostURL}</Text>
-          <Text>{activeJob[0].values.jobID}</Text>
+
+          {activeJob[0].values.dateApplied != '' && <Title>Date Applied: </Title>}
           <Text>{activeJob[0].values.dateApplied}</Text>
+
+          {activeJob[0].values.addtlNotes != '' && <Title>Notes: </Title>}
           <Text>{activeJob[0].values.addtlNotes}</Text>
         </Card>
       </View>
@@ -100,7 +107,7 @@ const Jobs = () => {
 
       function handleJobDeetsPress() {
         navigation.navigate('Back to Job List');
-        activeJobForDetails.current = item.values.jobID;
+        activeJobForDetails.current = item.values.jobPostURL;
       }
 
 
@@ -152,14 +159,13 @@ const Jobs = () => {
                 companyName: '',
                 jobTitle: '',
                 jobPostURL: '',
-                jobID: '',
                 dateApplied: '',
                 addtlNotes: '',
               }}
 
               validationSchema={Yup.object().shape({
                 companyName: Yup.string().required('Company name is required'),
-                jobPostURL: Yup.string().required('Job post URL is required'),
+                jobPostURL: Yup.string().required('Job post URL or ID is required'),
               })}
 
               validateOnMount
@@ -193,17 +199,10 @@ const Jobs = () => {
 
                   <TextInput
                     style={styles.input}
-                    placeholder={'Job Post URL *'}
+                    placeholder={'URL or ID*'}
+                    placeholderTextColor={'#A2A2A2'}
                     onChangeText={handleChange('jobPostURL')}
                     value={values.jobPostURL}
-                  />
-
-                  <TextInput
-                    style={styles.input}
-                    placeholder={'Job ID (required)'}
-                    placeholderTextColor={'#A2A2A2'}
-                    onChangeText={handleChange('jobID')}
-                    value={values.jobID}
                   />
 
                   <TextInput
