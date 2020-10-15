@@ -97,7 +97,7 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 - [React Native Community Picker](https://www.npmjs.com/package/@react-native-community/picker)
 - [React Native Async Storage](https://reactnative.dev/docs/asyncstorage)
 - [Formik](https://formik.org/)
-- [Yum](https://github.com/jquense/yup)
+- [Yup](https://github.com/jquense/yup)
 - [Expo](https://expo.io/)
 - [Vector Icons](https://docs.expo.io/guides/icons/)
 - [Material Community Icons](https://reactnativeelements.com/docs/icon/)
