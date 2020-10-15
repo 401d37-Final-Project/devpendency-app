@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity, Linking, Alert, WebView } from 'react-native';
 import { Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Constants from 'expo-constants';
 
@@ -51,8 +51,8 @@ const peopleObjects = [
     subtitle: 'Software Developer',
     content: 'Card content 1',
     uri: 'https://picsum.photos/700',
-    githubURL: 'url for github 1',
-    linkedinURL: 'url for linkedin 1'
+    githubURL: 'https://github.com/blakerom',
+    linkedinURL: 'https://www.linkedin.com/in/blakeromero'
   },
   {
     id: 2,
@@ -60,7 +60,7 @@ const peopleObjects = [
     subtitle: 'Software Developer',
     content: 'Card content 2',
     uri: 'https://picsum.photos/700',
-    githubURL: 'url for github 2',
+    githubURL: 'https://www.linkedin.com/in/tia-low',
     linkedinURL: 'url for linkedin 2'
   }, 
   {
@@ -69,7 +69,7 @@ const peopleObjects = [
     subtitle: 'Software Developer',
     content: 'Card content 3',
     uri: 'https://picsum.photos/700',
-    githubURL: 'url for github 3',
+    githubURL: 'https://github.com/herrigesmt',
     linkedinURL: 'url for linkedin 3'
   }, 
   {
@@ -78,20 +78,22 @@ const peopleObjects = [
     subtitle: 'Software Developer',
     content: 'Card content 4',
     uri: 'https://picsum.photos/700',
-    githubURL: 'url for github 4',
+    githubURL: 'https://github.com/SBALDOCK',
     linkedinURL: 'url for linkedin 4'
   }
 ];
 
 const gotoGithub = (url) => {
-  console.log(`clicked on Github ${url}`);
-  return;
-}
+  Linking.openURL(url).catch(err =>
+    Alert.alert(`Could not find ${url}. Make sure you include an \'http://\' or \'https://\'`)
+  );
+};
 
 const gotoLinkedin = (url) => {
-  console.log(`clicked on linkedin ${url}`);
-  return;
-}
+  Linking.openURL(url).catch(err =>
+    Alert.alert(`Could not find ${url}. Make sure you include an \'http://\' or \'https://\'`)
+  );
+};
 
 const RenderDevCard = props => {
   return (

@@ -115,91 +115,94 @@ const Bookmarks = (props) => {
       }
 
 
-      return (
-        <View style={styles.basic}>
-          <Card style={styles.cards}>
-            <TouchableOpacity
-              keyExtractor={(item) => item.id}
-              item={item}>
-              <Button
-                mode="outlined" onPress={handleClick}>
-                {item.values.name}
-              </Button>
-            </TouchableOpacity>
-            <Text style={styles.description}>
-              {item.values.description}
-            </Text>
-            <TouchableOpacity>
+     
+    return (
+      <View style={styles.basic}>
+        <Card style={styles.cards}>
+          <TouchableOpacity
+            keyExtractor={(item) => item.id}
+            item={item}>
+            <Button
+              mode="contained" onPress={handleClick}>
+              {item.values.name}
+            </Button>
+          </TouchableOpacity>
+          <Text style={styles.description}>
+            {item.values.description}
+          </Text>
+          <Text style={styles.delete}>
+            Delete
+          </Text>
+          <TouchableOpacity>
               <IconButton
                 icon="delete"
                 size={20}
                 onPress={() => deleteItem(item.values.url)} />
-            </TouchableOpacity>
-          </Card>
-        </View>
-      )
-    }
-    return (
+          </TouchableOpacity>
+        </Card>
+      </View>
+    )
+  }
+  return (
+    <>
+      <View style={styles.basic}>
+      <Card style={styles.cards}>
+        <Formik
+          initialValues={{
+            name: '',
+            url: '',
+            description: ''
+          }}
+          onSubmit={(values, { resetForm }) => {
+            console.log('submitted', values)
+            const newBookmarks = [...bookmark, { values }]
+            setBookmarks(newBookmarks);
+            resetForm({ values: '' })
+            setObjValue(newBookmarks)
+          }
 
-      <>
-        <View style={styles.basic}>
-          <Card style={styles.cards}>
-            <Formik
-              initialValues={{
-                name: '',
-                url: '',
-                description: ''
-              }}
-              onSubmit={(values, { resetForm }) => {
-                console.log('submitted', values)
-                const newBookmarks = [...bookmark, { values }]
-                setBookmarks(newBookmarks);
-                resetForm({ values: '' })
-                setObjValue(newBookmarks)
-              }
+          }>
 
-              }>
+          {({ handleChange, handleSubmit, values }) => (
 
-              {({ handleChange, handleSubmit, values }) => (
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+   
+              <TextInput
+                style={styles.input}
+                placeholder={'Bookmark URL'}
+                value={values.url}
+                onChangeText={handleChange('url')} />
+      
+              <TextInput
+                style={styles.input}
+                placeholder={'Bookmark Name'}
+                value={values.name}
+                onChangeText={handleChange('name')} />
+          
+              <TextInput
+                style={styles.input}
+                placeholder={'Bookmark Description'}
+                value={values.description}
+                onChangeText={handleChange('description')} />
+              <Button
+                mode="contained"
+                onPress={handleSubmit}
+                >
+                Submit
+            </Button>
+            </View>
 
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                  <Text style={styles.heading} >Add a new Bookmark</Text>
-                  {/* <Text style={styles.baseText}>Bookmark URL</Text> */}
-                  <TextInput
-                    style={styles.input}
-                    placeholder={'Bookmark URL'}
-                    value={values.url}
-                    onChangeText={handleChange('url')} />
-                  {/* <Text style={styles.baseText}>Bookmark Name</Text> */}
-                  <TextInput
-                    style={styles.input}
-                    placeholder={'Bookmark Name'}
-                    value={values.name}
-                    onChangeText={handleChange('name')} />
-                  {/* <Text style={styles.baseText}>Bookmark Description</Text> */}
-                  <TextInput
-                    style={styles.input}
-                    placeholder={'Bookmark Description'}
-                    value={values.description}
-                    onChangeText={handleChange('description')} />
-                  <Button
-                    mode="outlined"
-                    onPress={handleSubmit}>
-                    Submit
-                  </Button>
-                </View>
+          )}
+        </Formik>
+      </Card>
+      </View>
 
-              )}
-            </Formik>
-          </Card>
-        </View>
-
-        <FlatList
-          style={{ marginVertical: 10 }}
-          data={bookmarkList}
-          keyExtractor={(value, index) => index.toString()}
-          renderItem={renderItem}
-        />
+      <FlatList
+        style={{ marginVertical: 10 }}
+        data={bookmarkList}
+        keyExtractor={(value, index) => index.toString()}
+        renderItem={renderItem}
+      />
 
       </>
     );

@@ -4,9 +4,8 @@ import React, { useState, useRef } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { StyleSheet, Button, View, TextInput, FlatList, TouchableOpacity, StatusBar } from 'react-native';
-import { Title, Paragraph, Text, Card, IconButton, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-
+import { StyleSheet, View, TextInput, FlatList, TouchableOpacity, StatusBar } from 'react-native';
+import { Title, Button, IconButton, Paragraph, Text, Card, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 
 import { Formik } from 'formik';
@@ -25,6 +24,7 @@ const styles = StyleSheet.create({
     marginTop:20,
     alignItems: "center",
     padding: 10,
+    color: '#F9665E',
   },
   basic: {
     flexDirection: 'column',
@@ -123,6 +123,7 @@ const Jobs = () => {
               title='Delete'
               icon='delete'
               onPress={() => deleteItem(item.values.jobID)}/>
+
     
           </TouchableOpacity>
         
@@ -196,10 +197,10 @@ const Jobs = () => {
             />
     
           <Button 
-            onPress={handleSubmit} 
-            title="Add Job" 
+            onPress={handleSubmit}
+            mode="contained"
             style={{color: '#F9665E'}}
-            />
+            >Add Job</Button>
             </View>
     )}
   </Formik>
