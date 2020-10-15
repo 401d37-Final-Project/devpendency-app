@@ -10,7 +10,7 @@ Dev Herriges - [GitHub](https://github.com/herrigesmt) || [LinkedIn](https://www
 Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.linkedin.com/in/stephentbaldock/)
 
 # The Devpendency Application
-
+[![version](https://img.shields.io/badge/version-0.0.8-yellow.svg)](https://semver.org)<br/>
 **React Native** mobile app for the developer on-the-go, bringing several convenient resources to one place. Provides multiple feature in a clean, easily-navigable user interface.
 
 ### Features
@@ -48,15 +48,30 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 
 ## Usage
 
-- Home screen provides a quick summary of the three main features of the application. Static tab navigation at the bottom of the screen lets you explore the features, with nested stacked screen navigation inside the Dev Napkin and Jobs features. 
-- Experiment with the drawing feature by creating new drawings and saving them to access later. 
+- Home screen provides a quick summary of the three main features of the application. Static tab navigation at the bottom of the screen lets you explore the features, with nested stack screen navigation inside the Dev Napkin and Jobs features. 
+- Experiment with the drawing feature by creating new drawings and saving them for easy accessibility later. 
 - Complete the simple form entries to enter in your bookmarks and save to the collection to access later. Notice that your saved bookmark is linked and will navigate to your browser.
-  - *Bookmark links must contain entire url, for example:* **https://github.com/**
+  - *Bookmark links must contain the entire url, for example:* **ht<span>tps://github.c</span>om**
 - Complete form fields to save a job you'd like to track. Saved collection will be a list with quick reference fields. Use the icons to delete a job from the list or expand on an individual job to see more details. Simple navigation back from there to your saved list of all jobs. 
+- View the developers involved in the project and link to their GitHub and LinkedIn accounts.
 
-## Tests
+## Contributing
+[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)  
 
-(ツ)_/¯
+1. **Fork** the project on GitHub.
+2. **Git clone** the project to your local machine.
+3. **Git checkout** your own branch to work on.
+4. **Add, Commit** changes to your branch.
+5. **Push** changes to your branch.
+6. Submit a **Pull Request** so that we can review your changes!
+
+
+### Contribution Guidelines
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
+<br/>
+   *Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. Please contact [Tia Low](mailto:lowtia@gmail.com) to report any violations.*
+   <br/>
+   [Guidelines](CONTRIBUTIONS.md)
 
 ## Software Requirements
 
@@ -72,13 +87,29 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 
 ![domain-model](assets/uml.png)
 
+## Libraries
+
+- [React Native](https://reactnative.dev/)
+- [React Native Paper](https://callstack.github.io/react-native-paper/)
+- [React Navigation](https://reactnavigation.org/)
+- [React Native SVG](https://www.npmjs.com/package/react-native-svg)
+- [React Native Community Picker](https://www.npmjs.com/package/@react-native-community/picker)
+- [React Native Async Storage](https://reactnative.dev/docs/asyncstorage)
+- [Formik](https://formik.org/)
+- [Expo](https://expo.io/)
+- [Vector Icons](https://docs.expo.io/guides/icons/)
+- [Material Community Icons](https://reactnativeelements.com/docs/icon/)
+- [Expo Google Fonts](https://www.npmjs.com/package/@expo-google-fonts/inter)
+
 ## Resources 
 
-**RESOURCES OR LINKS TO INCLUDE HERE?**
+- [React Native Async Storage](https://react-native-async-storage.github.io/async-storage/docs/api/#mergeitem)
+- [Icon Search](https://oblador.github.io/react-native-vector-icons/)
 
-- Sean Murray for some assistance with storage persistense [LinkedIn](https://www.linkedin.com/in/sean-j-murray/) || [GitHub](https://github.com/seanjmurray)
-- JB?
+- JB Tellez for guidance and support [LinkedIn](https://www.linkedin.com/in/jb-tellez/) || [GitHub](https://github.com/JB-Tellez)
+- Sean Murray for assistance with storage persistense [LinkedIn](https://www.linkedin.com/in/sean-j-murray/) || [GitHub](https://github.com/seanjmurray)
 
 ## License
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
 [MIT License](LICENSE)
