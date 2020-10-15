@@ -1,4 +1,6 @@
-![logo](assets/logo.png)
+<p align="center">
+  <img width="300" height="300" src='./assets/logo.png'>
+</p>
 
 ## The Devpendents
 
@@ -9,7 +11,7 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 
 # The Devpendency Application
 
-Mobile app for the developer on-the-go, bringing several convenient resources to one place. Provides multiple feature in a clean, easily-navigable user interface.
+**React Native** mobile app for the developer on-the-go, bringing several convenient resources to one place. Provides multiple feature in a clean, easily-navigable user interface.
 
 ### Features
 
@@ -22,18 +24,36 @@ Mobile app for the developer on-the-go, bringing several convenient resources to
 
 ## Install
 
+*Project currently relies on Expo CLI, please install first as instructed below if you don't already have it installed. NPM package publish coming soon!*
+
+     npm i -g expo-cli
+<br/>
+
      git clone https://github.com/401d37-Final-Project/devpendency-app.git
 
+<br/> 
+
+    cd devpendency-app
+<br/>
 
      npm install
+<br/>
 
+     npm add expo 
+<br/>
 
+    expo start 
+
+*If you have Expo client installed on your phone, scan the QR code and enjoy! Alternatively you can run the app in an emulator. You can view the app in a web browser, although we do not recommend as it is not indicative of viewing as intended on a mobile device.*
 
 ## Usage
 
-## Platform
+- Home screen provides a quick summary of the three main features of the application. Static tab navigation at the bottom of the screen lets you explore the features, with nested stacked screen navigation inside the Dev Napkin and Jobs features. 
+- Experiment with the drawing feature by creating new drawings and saving them to access later. 
+- Complete the simple form entries to enter in your bookmarks and save to the collection to access later. Notice that your saved bookmark is linked and will navigate to your browser.
+  - *Bookmark links must contain entire url, for example:* **https://github.com/**
+- Complete form fields to save a job you'd like to track. Saved collection will be a list with quick reference fields. Use the icons to delete a job from the list or expand on an individual job to see more details. Simple navigation back from there to your saved list of all jobs. 
 
-React Native
 
 ## Software Requirements
 
@@ -48,3 +68,14 @@ React Native
 ## UML
 
 ![domain-model](assets/uml.png)
+
+## Resources 
+
+**ANYTHING TO INCLUDE HERE? RESOURCES?**
+
+- Sean Murray for some assistance with storage persistense [LinkedIn](https://www.linkedin.com/in/sean-j-murray/) || [GitHub](https://github.com/seanjmurray)
+- JB?
+
+## License
+
+[MIT License](LICENSE)
