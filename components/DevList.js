@@ -70,7 +70,7 @@ const peopleObjects = [
     id: 3,
     name: 'Matt', 
     subtitle: 'Software Developer',
-    content: 'Card content 3',
+    content: 'Tech-loving software developer based in the greater Seattle area with a background in customer service and hospitality and a passion for problem-solving.',
     uri: 'https://picsum.photos/700',
     githubURL: 'https://github.com/herrigesmt',
     linkedinURL: 'https://www.linkedin.com/in/herrigesmt'
