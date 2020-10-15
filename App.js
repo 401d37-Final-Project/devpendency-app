@@ -47,7 +47,7 @@ export default function App() {
 
 
   return (
-
+    
     <PaperProvider theme={theme}>
       <NavigationContainer theme={theme}>
         <Tab.Navigator
@@ -86,11 +86,10 @@ export default function App() {
           <Tab.Screen name="Bookmarks" component={Bookmarks} />
           <Tab.Screen name="Jobs" component={JobAdd} />
           <Tab.Screen name="About" component={AboutUs} />
-
         </Tab.Navigator>
       </NavigationContainer>
     </PaperProvider>
-
+    
   );
 };
 

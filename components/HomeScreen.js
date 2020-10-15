@@ -1,7 +1,8 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 
-import { StyleSheet, Image, View, Text } from 'react-native';
+import { StyleSheet, Image, View, Text, SafeAreaView, ScrollView} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Card, Paragraph } from 'react-native-paper';
 
@@ -11,22 +12,28 @@ const styles = StyleSheet.create({
     height: 250,
     width: 250,
   },
+  heroIcon: {
+  },
   homeIcons: {
     height: 150,
     width: 150,
   },
   cards: {
     flex: 1,
+    flexWrap: 'wrap', 
     padding: 20,
     marginTop: 5,
-    marginLeft: 10,
-    marginRight: 10,
+    marginHorizontal: 10,
     marginBottom: 20,
-    maxWidth: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    maxWidth: 250,
+    maxHeight: 250,
     elevation: 8,
   },
   text: {
-    fontSize: '1em',
+    flex: 1,
+    fontSize: 20,
   }
 });
 
@@ -34,44 +41,49 @@ const styles = StyleSheet.create({
 const HomeScreen = () => {
   return (
 
-    <>
-
+    <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
     <View style={{flex: 1}}>
 
-    <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'}}>
       <Image
         source={require('../assets/logo_dark.png')}
         style={styles.logo} />
     </View>
 
-    <View
-      style={{flex: 1}}>
+    <View style={{justifyContent: 'space-evenly',
+    alignItems: 'center'}}>
         <Card
           style={styles.cards}>
 
-          
-          <Image 
-            source={require('../assets/napkin.png')}
-            style={styles.homeIcons}/>
+          <Ionicons
+            name={'md-brush'}
+            size={80}
+            color={'black'}
+            style={styles.heroIcon}/>
             <Paragraph style={styles.text}>Quick idea for your next app? Sketch it out on the Dev Napkin and save it for future reference.</Paragraph>
         </Card>
     </View>
 
     <View
-      style={{flex:1, flexDirection: 'row'}}>
+      style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
         <Card
           style={styles.cards}>
-          <Image 
-            source={require('../assets/bookmark.png')}
-            style={styles.homeIcons}/>
-          <Paragraph style={styles.text}>Need to keep track of all your bookmarks? Save them here and follow the link to your browser. </Paragraph>
+          <Ionicons
+            name={'md-book'}
+            size={80}
+            color={'black'}
+            style={styles.heroIcon}/>
+          <Paragraph style={styles.text}>Need to keep track of all your resources? Save them here and follow the link directly to the browser. </Paragraph>
         </Card>
 
         <Card
           style={styles.cards}>
-          <Image 
-            source={require('../assets/app.png')}
-            style={styles.homeIcons}/>
+          <Ionicons
+            name={'md-document'}
+            size={80}
+            color={'black'}
+            style={styles.heroIcon}/>
           <Paragraph style={styles.text}>A Dev is always on the lookout for new opportunities! Track your job apps here. </Paragraph>
         </Card>
 
@@ -79,7 +91,8 @@ const HomeScreen = () => {
 
     </View>
 
-    </>
+    </ScrollView>
+    </SafeAreaView>
 
   );
 };
