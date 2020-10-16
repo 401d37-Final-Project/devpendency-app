@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   basic: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
   },
   cards: {
     flex: 1,

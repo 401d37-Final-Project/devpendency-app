@@ -269,8 +269,6 @@ export default function Sketch() {
     
     return (
       <>
-      <Text>Made it!</Text>
-
       <FlatList
       keyExtractor={(value, index) => index.toString()}
       data={coordsArrays}
