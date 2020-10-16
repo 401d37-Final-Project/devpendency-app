@@ -52,7 +52,7 @@ const peopleObjects = [
     id: 1,
     name: 'Blake', 
     subtitle: 'Software Developer',
-    content: 'Blake is a huge nerd for learning new technologies, a true jack of all trades. A veteran of the U.S. Army and experienced in international collaboration he always strives to create a better quality of life for everyone around him.',
+    content: 'Blake is a full-stack developer and a huge nerd for learning new technologies. A veteran of the U.S. Army and experienced in international collaboration he always strives to create a better quality of life for everyone through code.',
     uri: require('../assets/images/blake.jpg'),
     githubURL: 'https://github.com/blakerom',
     linkedinURL: 'https://www.linkedin.com/in/blakeromero'
@@ -61,7 +61,7 @@ const peopleObjects = [
     id: 2,
     name: 'Tia', 
     subtitle: 'Software Developer',
-    content: 'Card content 2',
+    content: 'Curious and self-motivated full-stack software developer with a diverse background of work experience, always looking for new things to Google.',
     uri: require('../assets/images/tia.jpg'),
     githubURL: 'https://www.linkedin.com/in/tia-low',
     linkedinURL: 'https://www.linkedin.com/in/tia-low/'
@@ -70,8 +70,8 @@ const peopleObjects = [
     id: 3,
     name: 'Matt', 
     subtitle: 'Software Developer',
-    content: 'Card content 3',
-    uri: 'https://picsum.photos/700',
+    content: 'Tech-loving software developer based in the greater Seattle area with a background in customer service and hospitality and a passion for problem-solving.',
+    uri: require('../assets/images/matt.jpg'),
     githubURL: 'https://github.com/herrigesmt',
     linkedinURL: 'https://www.linkedin.com/in/herrigesmt'
   }, 

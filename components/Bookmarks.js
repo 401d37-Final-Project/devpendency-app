@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, SafeAreaView, ScrollView, StatusBar, FlatList, Container, TextInput, View, Linking, TouchableOpacity } from 'react-native';
-import { useFormik, Formik, Field, Form, yupToFormErrors } from 'formik';
+import { StyleSheet, FlatList, TextInput, View, Linking, TouchableOpacity } from 'react-native';
+import { Formik } from 'formik';
 import { Button, Text, Card, IconButton, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Yup from 'yup';
@@ -33,13 +33,10 @@ const styles = StyleSheet.create({
   basic: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
   },
   cards: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
     padding: 20,
     marginTop: 10,
     maxWidth: '80%',
@@ -50,7 +47,6 @@ const styles = StyleSheet.create({
   left: {
     flex: 6,
     justifyContent: 'flex-end',
-
     alignSelf: 'stretch',
   },
   right: {
@@ -163,12 +159,9 @@ const Bookmarks = (props) => {
                 description: ''
               }}
               validationSchema={Yup.object().shape({
-                url: Yup.string()
-                  .required('URL is required'),
-                name: Yup.string()
-                  .required('Name is required'),
-                description: Yup.string()
-                  .required('Description is required')
+                url: Yup.string().required('URL is required'),
+                name: Yup.string().required('Name is required'),
+                description: Yup.string().required('Description is required')
               })}
               validateOnMount
               onSubmit={(values, { resetForm }) => {

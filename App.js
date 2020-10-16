@@ -8,6 +8,11 @@ import { AppLoading } from 'expo';
 import { useFonts } from '@expo-google-fonts/inter';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 
+// Log Clear ============================================
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
+// ======================================================
 
 import HomeScreen from './components/HomeScreen.js'
 import Bookmarks from './components/Bookmarks.js';
