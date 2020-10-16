@@ -11,7 +11,7 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 
 # The Devpendency Application
 [![version](https://img.shields.io/badge/version-1.0.0-yellow.svg)](https://semver.org)<br/>
-**React Native** mobile app for the developer on-the-go, bringing several convenient resources to one place. Provides multiple feature in a clean, easily-navigable user interface.
+**React Native** mobile app for the developer on-the-go, bringing several convenient resources to one place. Provides multiple features in a clean, easily-navigable user interface.
 
 ### Features
 
