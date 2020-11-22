@@ -20,6 +20,16 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 **Bookmarks**: save your helpful online resources in one place. Your collection of bookmarks will persist with the ability to delete as needed. Click the saved bookmark to open in your default web browser.
 
 **Job App Tracker**: quickly keep track of any jobs you've applied for and additional notes as needed. Save them to one collection with the ability to click an individual job to see more details. *Update functionality coming soon!*
+<p align="center">
+<img alt="Homepage" width="150" height="285" src='./assets/images/home.jpg'>
+<img alt="Drawing page" width="150" height="285" src='./assets/images/dev-nap.jpg'>
+<img alt="Bookmark tracker page" width="150" height="285" src='./assets/images/bookmark.jpg'>
+</p>
+
+<p align="center">
+<img alt="Job application tracker page" width="150" height="285" src='./assets/images/job-app.jpg'>
+<img alt="About the developers page" width="150" height="285" src='./assets/images/about-us.jpg'>
+</p>
 
 
 ## Install
@@ -71,7 +81,7 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 <br/>
 [Guidelines](CONTRIBUTIONS.md)
 <br/>
-   *Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. Please contact any of the lead developers to report any violations: [Tia Low](mailto:lowtia@gmail.com), [Steve Baldock](stephenbaldock78@gmail.com), [Matt Herriges](herrigesmt@gmail.com), [Blake Romero](blakeromero001@gmail.com).*
+   *Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. Please contact any of the lead developers to report any violations: [Tia Low](mailto:lowtia@gmail.com), [Steve Baldock](mailto:stephenbaldock78@gmail.com), [Matt Herriges](mailto:herrigesmt@gmail.com), [Blake Romero](mailto:blakeromero001@gmail.com).*
    
 
 ## Software Requirements
