@@ -21,14 +21,14 @@ Dev Baldock - [GitHub](https://github.com/SBALDOCK) || [LinkedIn](https://www.li
 
 **Job App Tracker**: quickly keep track of any jobs you've applied for and additional notes as needed. Save them to one collection with the ability to click an individual job to see more details. *Update functionality coming soon!*
 <p align="center">
-<img alt="Homepage" width="150" height="285" src='./assets/images/home.jpg'>
-<img alt="Drawing page" width="150" height="285" src='./assets/images/dev-nap.jpg'>
-<img alt="Bookmark tracker page" width="150" height="285" src='./assets/images/bookmark.jpg'>
+<img alt="Homepage" width="175" height="350" src='./assets/images/home.jpg'>
+<img alt="Drawing page" width="175" height="350" src='./assets/images/dev-nap.jpg'>
+<img alt="Bookmark tracker page" width="175" height="350" src='./assets/images/bookmark.jpg'>
 </p>
 
 <p align="center">
-<img alt="Job application tracker page" width="150" height="285" src='./assets/images/job-app.jpg'>
-<img alt="About the developers page" width="150" height="285" src='./assets/images/about-us.jpg'>
+<img alt="Job application tracker page" width="175" height="350" src='./assets/images/job-app.jpg'>
+<img alt="About the developers page" width="175" height="350" src='./assets/images/about-us.jpg'>
 </p>
 
 
